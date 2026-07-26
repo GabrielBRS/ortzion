@@ -1,0 +1,222 @@
+---
+title: Ortzion — Plataforma de Infraestrutura
+description: Repositório único da infraestrutura corporativa Ortzion — borda, identidade, dados, IaC e segurança. Não abriga aplicações nem produtos.
+status: ativo
+owner: Sousa Global Technologies (SGT)
+---
+
+# Ortzion — Plataforma de Infraestrutura
+
+> **Este repositório é a fundação, não o prédio.**
+>
+> Tudo que existe aqui é **infraestrutura da empresa**: borda de rede, autenticação,
+> armazenamento, malha de dados, provisionamento e segurança.
+> **Aplicações e produtos não moram aqui.** Eles vivem em repositórios próprios e se
+> conectam a esta plataforma como consumidores, através do gateway e dos contratos gRPC
+> publicados por ela.
+
+---
+
+## 1. Escopo — o que é e o que não é
+
+A regra de corte é uma pergunta só: *"se a empresa trocasse todos os seus produtos amanhã,
+esta peça continuaria existindo?"*
+
+Se a resposta for **sim**, é infraestrutura e o lugar dela é aqui.
+Se for **não**, é aplicação e o lugar dela é em outro repositório.
+
+### Mora aqui
+
+- **Gateway de borda** — o primeiro processo que toca qualquer requisição externa.
+- **Servidores de identidade e autenticação** — emissão, validação e revogação de credenciais.
+- **Infraestrutura de dados massivos** — bancos relacionais, documentais, vetoriais, cache e object storage.
+- **Infrastructure as Code** — o provisionamento declarativo de tudo acima.
+- **Segurança e segredos** — Vault, políticas, papéis, rotação.
+- **Portais institucionais da própria empresa** — as páginas que representam a Ortzion, não um produto vendido.
+
+### Não mora aqui
+
+- Regras de negócio de produto.
+- Domínios verticais (HealthTech, FinTech, GovTech, telecom aplicado a cliente).
+- Front-ends de produto voltados ao cliente final.
+- Modelos, pipelines e agentes específicos de uma aplicação.
+
+Esses itens consomem a plataforma; não fazem parte dela.
+
+---
+
+## 2. Princípios de arquitetura
+
+1. **Sovereign-by-design.** Nada essencial depende de um provedor gerenciado externo.
+Todo componente precisa rodar em hardware próprio, em `k3s` ou bare-metal, sem
+degradação funcional.
+2. **On-premise first.** A avaliação de qualquer tecnologia parte da edição
+auto-hospedada em uso comercial fechado — licença, limites e capacidades reais.
+Free tier de SaaS não entra na conta.
+3. **Uma única porta de entrada.** Nenhuma aplicação é exposta diretamente. O gateway é
+o ponto de admissão, e é onde vivem TLS, roteamento, autenticação, rate limit e observabilidade.
+4. **gRPC como transporte interno.** Da borda para dentro a comunicação é gRPC, sobre
+contratos `.proto` versionados. REST/HTTP fica restrito à fronteira pública, quando necessário.
+5. **Performance por camada.** Rust nos caminhos quentes e críticos de segurança
+(o gateway é Rust), Go em serviços de plataforma e identidade, Python apenas como
+plano de controle e orquestração — nunca no caminho quente.
+6. **Fail-closed.** Em `staging` e `production`, ausência de segredo ou indisponibilidade
+do Vault aborta o boot. Nunca há fallback silencioso para variáveis de ambiente.
+
+---
+
+## 3. Caminho da requisição
+
+O fluxo é sempre o mesmo, sem exceção e sem atalho:
+
+```
+                        ┌──────────────────────────────┐
+   Cliente externo ───► │  ortzion_gateway (Rust)      │
+   (HTTPS)              │  TLS · roteamento · authN    │
+                        │  rate limit · tracing        │
+                        └───────────────┬──────────────┘
+                                        │ gRPC
+                        ┌───────────────┴──────────────┐
+                        │                              │
+                        ▼                              ▼
+              ┌───────────────────┐          ┌────────────────────┐
+              │ ortzion_identity  │          │ Aplicação interna  │
+              │ (authN / authZ)   │          │ (repo próprio)     │
+              └─────────┬─────────┘          └──────────┬─────────┘
+                        │                               │ gRPC
+                        │                               ▼
+                        │                    ┌────────────────────┐
+                        └───────────────────►│ Camada de dados    │
+                                             │ postgres · valkey  │
+                                             │ milvus · ferretdb  │
+                                             │ bucket             │
+                                             └────────────────────┘
+```
+
+Descrito em prosa:
+
+1. A requisição externa chega **exclusivamente** no `ortzion_gateway`. É ele quem termina
+o TLS, normaliza o pedido, aplica limites e correlaciona o `x-request-id`.
+2. O gateway consulta o **servidor de identidade** para autenticar e autorizar. Sem
+credencial válida, a requisição morre na borda — nada trafega para dentro.
+3. Autorizada, a requisição é traduzida para uma chamada **gRPC** e roteada para a
+aplicação interna correspondente, resolvida por nome de serviço no `k3s`.
+4. A aplicação executa sua regra de negócio, conversa com a **camada de dados** desta
+plataforma e devolve a resposta pelo mesmo canal gRPC.
+5. O gateway serializa de volta para o cliente e encerra o traço de observabilidade.
+
+O ponto que importa: **o gateway é a única fronteira**. Aplicações não publicam portas
+próprias para fora, não implementam autenticação por conta própria e não são alcançáveis
+sem passar por ele.
+
+---
+
+## 4. Mapa do repositório
+
+```
+ortzion/
+├── backend/                  Serviços de plataforma (não são produtos)
+│   ├── ortzion_identity/       Identidade, autenticação e autorização
+│   ├── ortzion_payments/       Trilho transversal de pagamentos
+│   └── ortzion_telecom/        Trilho transversal de comunicação (SMS, e-mail, WhatsApp)
+│
+├── data_engineering/         Infraestrutura de dados massivos
+│   ├── ortzion_postgres/       Relacional — fonte da verdade transacional
+│   ├── ortzion_valkey/         Cache e estruturas em memória
+│   ├── ortzion_milvus/         Banco vetorial — recuperação semântica
+│   └── ortzion_ferretDB/       Camada documental sobre Postgres
+│
+├── frontend/                 Presença institucional da própria empresa
+│   ├── ortzion_frontend_principal_company_page/
+│   └── ortzion_frontend_consultancy_company_page/
+│
+├── gateway/
+│   └── ortzion_gateway/        Borda em Rust — Cargo workspace
+│
+├── infrastructure/           Infrastructure as Code (provisionamento declarativo)
+│   ├── ortzion_cluster/            Cluster k3s — nós, runtime, rede
+│   ├── ortzion_bucket/             Object storage
+│   ├── ortzion_data-engineering/   Composição da malha de dados
+│   ├── ortzion_iac_gateway/
+│   ├── ortzion_iac_backend/
+│   ├── ortzion_iac_edge-backend/
+│   ├── ortzion_iac_frontend/
+│   ├── ortzion_iac_database/
+│   ├── ortzion_iac_cache-database/
+│   ├── ortzion_iac_vector-database/
+│   └── ortzion_iac_ai-orchestration/
+│
+├── security/                 Postura de segurança da plataforma
+│   ├── identity/               Papéis, políticas, federação
+│   └── vault/                  Segredos, rotação, AppRole
+│
+└── Readme.mdx                Este documento
+```
+
+### Leitura das camadas
+
+| Diretório | Papel | Natureza |
+| --- | --- | --- |
+| `gateway/` | Admissão e roteamento | Plano de dados — caminho quente |
+| `backend/` | Capacidades transversais da empresa | Plano de dados — serviços de plataforma |
+| `data_engineering/` | Persistência e recuperação | Estado |
+| `infrastructure/` | Como tudo acima nasce e é reconstruído | Plano de controle |
+| `security/` | Confiança, segredos e políticas | Transversal |
+| `frontend/` | Fachada institucional | Apresentação |
+
+`backend/` merece atenção: ele existe aqui porque `identity`, `payments` e `telecom` são
+**capacidades transversais** — qualquer produto futuro vai precisar delas, e nenhum
+produto específico é dono delas. Um serviço que só faz sentido para um produto não entra
+nesse diretório, entra no repositório daquele produto.
+
+---
+
+## 5. Como uma aplicação se conecta
+
+Toda aplicação nova segue o mesmo protocolo de integração:
+
+1. **Definir o contrato.** O `.proto` do serviço é versionado e publicado a partir desta
+plataforma. O contrato é a fronteira — mudança incompatível exige nova versão, nunca
+alteração em vigor.
+2. **Registrar a rota.** O gateway recebe a entrada de roteamento apontando para o nome
+de serviço no cluster. Nada é resolvido por IP fixo.
+3. **Declarar o escopo de autorização.** Quais papéis e permissões o serviço exige, e
+quais claims ele espera receber do `ortzion_identity`.
+4. **Declarar as dependências de dados.** Quais bancos, buckets ou coleções vetoriais
+serão consumidos, com o provisionamento correspondente descrito em `infrastructure/`.
+5. **Solicitar os segredos.** Caminho KV no Vault e política de leitura. Em desenvolvimento
+os segredos vêm do ambiente; a partir de `staging`, exclusivamente do Vault, em modo
+fail-closed.
+6. **Expor saúde.** `/health/live` sem tocar dependências e `/health/ready` verificando as
+dependências reais, retornando 503 quando alguma estiver fora.
+
+O que a aplicação **não** faz: expor porta pública, implementar login próprio, guardar
+segredo em arquivo versionado ou falar diretamente com o banco de outro serviço.
+
+---
+
+## 6. Convenções
+
+- **Nomenclatura.** Prefixo `ortzion_` em todo módulo de primeiro nível dentro das
+camadas. O sufixo descreve a função, não a tecnologia, quando isso for possível sem
+perda de clareza.
+- **Ambiente.** `APP_ENV` governa a origem dos segredos: ausente ou `development` lê do
+ambiente; `staging` e `production` leem do Vault e abortam o boot em caso de falha.
+Configurações que não são segredo (host, porta, pool, nível de log) vêm sempre do ambiente.
+- **Resolução de serviço.** Por nome, via DNS do cluster. IP fixo é sintoma de acoplamento.
+- **Observabilidade.** `x-request-id` é gerado na borda antes do traço e propagado em toda
+a cadeia, inclusive na resposta.
+- **Documentação.** Cada diretório de agrupamento mantém seu próprio `Readme.mdx`
+explicando o recorte local. Este documento é o índice e a lei geral.
+
+---
+
+## 7. Pendências conhecidas
+
+- Padronizar separador nos nomes de diretório: há mistura de `_` e `-`
+(`ortzion_data-engineering`, `ortzion_iac_cache-database`). Escolher um e aplicar em
+toda a árvore, sob pena de quebrar glob e script de automação.
+- Padronizar caixa: `ortzion_ferretDB` destoa do resto, que é minúsculo.
+- Confirmar que `gateway/ortzion_gateway/target/` está coberto pelo `.gitignore`.
+- Publicar o diretório de contratos `.proto` como artefato versionado consumível pelas
+aplicações externas.
