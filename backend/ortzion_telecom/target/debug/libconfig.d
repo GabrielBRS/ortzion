@@ -1,0 +1,1 @@
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/libconfig.rlib: /home/gabrielsousa/workspace/sgt/sgt_telecom/config/src/lib.rs /home/gabrielsousa/workspace/sgt/sgt_telecom/config/src/postgres/postgres_config.rs /home/gabrielsousa/workspace/sgt/sgt_telecom/config/src/postgres.rs

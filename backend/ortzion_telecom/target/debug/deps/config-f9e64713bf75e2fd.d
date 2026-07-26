@@ -1,0 +1,11 @@
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/config-f9e64713bf75e2fd.d: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/parser.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/types.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/error.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/reader.rs
+
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/libconfig-f9e64713bf75e2fd.rlib: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/parser.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/types.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/error.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/reader.rs
+
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/libconfig-f9e64713bf75e2fd.rmeta: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/parser.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/types.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/error.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/reader.rs
+
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/lib.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/parser.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/types.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/error.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/config-0.1.3/src/reader.rs:

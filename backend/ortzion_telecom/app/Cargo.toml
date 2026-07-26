@@ -1,0 +1,18 @@
+[package]
+name = "app"
+version.workspace      = true
+edition.workspace      = true
+rust-version.workspace = true
+
+[dependencies]
+modules = { path = "../modules" }
+shared  = { path = "../shared" }
+config  = { path = "../config" }
+compute  = { path = "../compute" }
+domain  = { path = "../domain" }
+
+tokio   = { version = "1", features = ["full"] }
+axum    = "0.8"
+anyhow  = "1"
+tracing = "0.1"
+tracing-subscriber = "0.3"

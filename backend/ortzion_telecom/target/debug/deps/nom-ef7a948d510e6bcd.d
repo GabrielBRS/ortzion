@@ -1,0 +1,13 @@
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/nom-ef7a948d510e6bcd.d: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/util.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/internal.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/macros.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/bytes.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/bits.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/nom.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/character.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/stream.rs
+
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/libnom-ef7a948d510e6bcd.rmeta: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/util.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/internal.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/macros.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/bytes.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/bits.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/nom.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/character.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/stream.rs
+
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/lib.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/util.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/internal.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/macros.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/bytes.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/bits.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/nom.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/character.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/nom-1.0.1/src/stream.rs:

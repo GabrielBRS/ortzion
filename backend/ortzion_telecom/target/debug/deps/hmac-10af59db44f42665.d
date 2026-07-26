@@ -1,0 +1,10 @@
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/hmac-10af59db44f42665.d: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/block_api.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/simple.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/simple_reset.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/utils.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/../README.md
+
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/libhmac-10af59db44f42665.rmeta: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/block_api.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/simple.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/simple_reset.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/utils.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/../README.md
+
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/lib.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/block_api.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/simple.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/simple_reset.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/utils.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hmac-0.13.0/src/../README.md:

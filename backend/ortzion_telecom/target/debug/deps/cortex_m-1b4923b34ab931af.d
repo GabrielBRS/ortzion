@@ -1,0 +1,10 @@
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/cortex_m-1b4923b34ab931af.d: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/macros.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/mod.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/dwt.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/nvic.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/scb.rs
+
+/home/gabrielsousa/workspace/sgt/sgt_telecom/target/debug/deps/libcortex_m-1b4923b34ab931af.rmeta: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/macros.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/mod.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/dwt.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/nvic.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/scb.rs
+
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/lib.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/macros.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/mod.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/dwt.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/nvic.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.5.11/src/peripheral/scb.rs:
