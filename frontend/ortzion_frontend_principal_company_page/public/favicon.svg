@@ -1,22 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 32 32">
-  <!-- Sol Ortzion — arte original, 16 pétalas -->
-  <g fill="#D3A62F">
-    <circle r="6.3" />
-    <path id="r" d="M0 -15 C1.35 -12.55 1.35 -9.95 0 -7.5 C-1.35 -9.95 -1.35 -12.55 0 -15Z" />
-    <use href="#r" transform="rotate(22.5)" />
-    <use href="#r" transform="rotate(45)" />
-    <use href="#r" transform="rotate(67.5)" />
-    <use href="#r" transform="rotate(90)" />
-    <use href="#r" transform="rotate(112.5)" />
-    <use href="#r" transform="rotate(135)" />
-    <use href="#r" transform="rotate(157.5)" />
-    <use href="#r" transform="rotate(180)" />
-    <use href="#r" transform="rotate(202.5)" />
-    <use href="#r" transform="rotate(225)" />
-    <use href="#r" transform="rotate(247.5)" />
-    <use href="#r" transform="rotate(270)" />
-    <use href="#r" transform="rotate(292.5)" />
-    <use href="#r" transform="rotate(315)" />
-    <use href="#r" transform="rotate(337.5)" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 32 32" width="32" height="32" role="img" aria-label="Ortzion">
+  <!-- Sol Ortzion — arte original -->
+  <g fill="#D0A539">
+    <circle r="7.2"/>
+    <path id="raio" d="M0.0 -15.4 C1.85 -12.6 1.85 -10.2 0.0 -8.0 C-1.85 -10.2 -1.85 -12.6 0.0 -15.4Z"/>
+    <use href="#raio" transform="rotate(30)"/>
+    <use href="#raio" transform="rotate(60)"/>
+    <use href="#raio" transform="rotate(90)"/>
+    <use href="#raio" transform="rotate(120)"/>
+    <use href="#raio" transform="rotate(150)"/>
+    <use href="#raio" transform="rotate(180)"/>
+    <use href="#raio" transform="rotate(210)"/>
+    <use href="#raio" transform="rotate(240)"/>
+    <use href="#raio" transform="rotate(270)"/>
+    <use href="#raio" transform="rotate(300)"/>
+    <use href="#raio" transform="rotate(330)"/>
   </g>
 </svg>
