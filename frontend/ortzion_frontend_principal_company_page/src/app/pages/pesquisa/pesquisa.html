@@ -1,0 +1,31 @@
+@if (cs.conteudo(); as t) {
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">{{ t.pesquisa.eyebrow }}</p>
+      <h1>{{ t.pesquisa.titulo }}</h1>
+      <p class="lede">{{ t.pesquisa.lede }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        @for (linha of t.pesquisa.linhas; track linha.titulo) {
+          <article class="card">
+            <h3>{{ linha.titulo }}</h3>
+            <p>{{ linha.texto }}</p>
+          </article>
+        }
+      </div>
+      <p class="note-confidencial">{{ t.pesquisa.nota }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <h2>{{ t.pesquisa.cta.titulo }}</h2>
+      <p>{{ t.pesquisa.cta.texto }}</p>
+      <a [routerLink]="cs.linkPara('contato')" class="btn btn-solid">{{ t.pesquisa.cta.botao }}</a>
+    </div>
+  </section>
+}

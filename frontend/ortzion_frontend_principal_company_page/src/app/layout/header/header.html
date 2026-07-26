@@ -1,0 +1,87 @@
+<header class="site-header">
+  <div class="container header-inner">
+    @if (cs.conteudo(); as t) {
+      <a
+        [routerLink]="cs.linkPara('home')"
+        class="brand"
+        (click)="closeMenu()"
+        [attr.aria-label]="t.nav.inicioAria"
+      >
+        <!-- Sol de 16 pétalas — arte original da Ortzion. Substitua pelo emblema oficial quando ele existir. -->
+        <svg class="brand-mark" viewBox="-16 -16 32 32" aria-hidden="true">
+          <g fill="currentColor">
+            <circle r="6.3" />
+            <path id="raio-sol" d="M0 -15 C1.35 -12.55 1.35 -9.95 0 -7.5 C-1.35 -9.95 -1.35 -12.55 0 -15Z" />
+            <use href="#raio-sol" transform="rotate(22.5)" />
+            <use href="#raio-sol" transform="rotate(45)" />
+            <use href="#raio-sol" transform="rotate(67.5)" />
+            <use href="#raio-sol" transform="rotate(90)" />
+            <use href="#raio-sol" transform="rotate(112.5)" />
+            <use href="#raio-sol" transform="rotate(135)" />
+            <use href="#raio-sol" transform="rotate(157.5)" />
+            <use href="#raio-sol" transform="rotate(180)" />
+            <use href="#raio-sol" transform="rotate(202.5)" />
+            <use href="#raio-sol" transform="rotate(225)" />
+            <use href="#raio-sol" transform="rotate(247.5)" />
+            <use href="#raio-sol" transform="rotate(270)" />
+            <use href="#raio-sol" transform="rotate(292.5)" />
+            <use href="#raio-sol" transform="rotate(315)" />
+            <use href="#raio-sol" transform="rotate(337.5)" />
+          </g>
+        </svg>
+        <span class="brand-name">Ortzion<span class="brand-suffix"> Technology</span></span>
+      </a>
+
+      <button
+        type="button"
+        class="menu-toggle"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="menu-principal"
+        [attr.aria-label]="t.nav.abrirMenu"
+      >
+        <span class="menu-toggle-bar"></span>
+        <span class="menu-toggle-bar"></span>
+        <span class="menu-toggle-bar"></span>
+      </button>
+
+      <nav
+        id="menu-principal"
+        class="site-nav"
+        [class.open]="menuOpen()"
+        [attr.aria-label]="t.nav.principalAria"
+      >
+        <a [routerLink]="cs.linkPara('consultoria')" routerLinkActive="active" (click)="closeMenu()">
+          {{ t.nav.consultoria }}
+        </a>
+        <a [routerLink]="cs.linkPara('servicos')" routerLinkActive="active" (click)="closeMenu()">
+          {{ t.nav.servicos }}
+        </a>
+        <a [routerLink]="cs.linkPara('produtos')" routerLinkActive="active" (click)="closeMenu()">
+          {{ t.nav.produtos }}
+        </a>
+        <a [routerLink]="cs.linkPara('pesquisa')" routerLinkActive="active" (click)="closeMenu()">
+          {{ t.nav.pesquisa }}
+        </a>
+        <a [routerLink]="cs.linkPara('noticias')" routerLinkActive="active" (click)="closeMenu()">
+          {{ t.nav.noticias }}
+        </a>
+
+        <div class="lang-switch" role="group" [attr.aria-label]="t.nav.idiomaAria">
+          @for (idioma of idiomas; track idioma) {
+            <a
+              class="lang"
+              [class.lang-ativa]="idioma === cs.idioma()"
+              [routerLink]="cs.linkPara(cs.pagina(), idioma)"
+              (click)="closeMenu()"
+            >{{ idioma.toUpperCase() }}</a>
+          }
+        </div>
+
+        <a [routerLink]="cs.linkPara('contato')" class="btn btn-solid nav-cta" (click)="closeMenu()">
+          {{ t.nav.contato }}
+        </a>
+      </nav>
+    }
+  </div>
+</header>

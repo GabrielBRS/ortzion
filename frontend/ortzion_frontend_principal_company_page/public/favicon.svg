@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 32 32">
+  <!-- Sol Ortzion — arte original, 16 pétalas -->
+  <g fill="#D3A62F">
+    <circle r="6.3" />
+    <path id="r" d="M0 -15 C1.35 -12.55 1.35 -9.95 0 -7.5 C-1.35 -9.95 -1.35 -12.55 0 -15Z" />
+    <use href="#r" transform="rotate(22.5)" />
+    <use href="#r" transform="rotate(45)" />
+    <use href="#r" transform="rotate(67.5)" />
+    <use href="#r" transform="rotate(90)" />
+    <use href="#r" transform="rotate(112.5)" />
+    <use href="#r" transform="rotate(135)" />
+    <use href="#r" transform="rotate(157.5)" />
+    <use href="#r" transform="rotate(180)" />
+    <use href="#r" transform="rotate(202.5)" />
+    <use href="#r" transform="rotate(225)" />
+    <use href="#r" transform="rotate(247.5)" />
+    <use href="#r" transform="rotate(270)" />
+    <use href="#r" transform="rotate(292.5)" />
+    <use href="#r" transform="rotate(315)" />
+    <use href="#r" transform="rotate(337.5)" />
+  </g>
+</svg>

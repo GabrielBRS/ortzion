@@ -1,0 +1,73 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(5.5rem, 13vh, 9rem);
+  border-bottom: 1px solid var(--color-border-soft);
+  background:
+    radial-gradient(52% 90% at 18% -12%, hsl(43 62% 52% / .12), transparent 62%),
+    radial-gradient(60% 100% at 100% 118%, hsl(222 60% 30% / .28), transparent 60%);
+}
+
+/* Céu estrelado sutil: pontos de 1px em radial-gradient, sem imagens externas.
+   As estrelas ficam no fundo; o sol (acento dourado) é o astro principal. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .55;
+  background-image:
+    radial-gradient(1px 1px at 12% 24%, hsl(43 80% 74% / .8) 50%, transparent 51%),
+    radial-gradient(1px 1px at 26% 68%, hsl(210 60% 88% / .55) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 38% 14%, hsl(43 80% 78% / .7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 52% 44%, hsl(210 50% 90% / .45) 50%, transparent 51%),
+    radial-gradient(1px 1px at 63% 78%, hsl(43 70% 76% / .5) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 74% 22%, hsl(210 60% 92% / .6) 50%, transparent 51%),
+    radial-gradient(1px 1px at 84% 56%, hsl(43 80% 74% / .65) 50%, transparent 51%),
+    radial-gradient(1px 1px at 92% 34%, hsl(210 50% 88% / .5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 8% 82%, hsl(210 55% 90% / .4) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 96% 84%, hsl(43 75% 76% / .55) 50%, transparent 51%);
+}
+
+.hero-conteudo {
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
+  max-width: 21ch;
+  margin: 1.1rem 0 1.3rem;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--color-accent-soft);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin-top: 2rem;
+}
+
+.hero-sectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.6rem;
+  margin-top: 3rem;
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.hero-sectors span { position: relative; }
+
+.hero-sectors span + span::before {
+  content: "·";
+  position: absolute;
+  left: -1.05rem;
+  color: var(--color-accent);
+}

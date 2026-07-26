@@ -1,0 +1,35 @@
+@if (cs.conteudo(); as t) {
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo">Ortzion Technology</p>
+        <p class="footer-tagline">{{ t.footer.tagline }}</p>
+      </div>
+
+      <nav class="footer-col" [attr.aria-label]="t.footer.navegacaoAria">
+        <p class="footer-heading">{{ t.footer.navegacao }}</p>
+        <a [routerLink]="cs.linkPara('home')">{{ t.footer.inicio }}</a>
+        <a [routerLink]="cs.linkPara('consultoria')">{{ t.nav.consultoria }}</a>
+        <a [routerLink]="cs.linkPara('servicos')">{{ t.nav.servicos }}</a>
+        <a [routerLink]="cs.linkPara('produtos')">{{ t.nav.produtos }}</a>
+        <a [routerLink]="cs.linkPara('pesquisa')">{{ t.nav.pesquisa }}</a>
+        <a [routerLink]="cs.linkPara('noticias')">{{ t.nav.noticias }}</a>
+        <a [routerLink]="cs.linkPara('contato')">{{ t.nav.contato }}</a>
+      </nav>
+
+      <div class="footer-col">
+        <p class="footer-heading">{{ t.footer.contato }}</p>
+        <a href="mailto:gabriel.sousa@ortzion.com">gabriel.sousa&#64;ortzion.com</a>
+        <!-- TODO: substituir pela URL real do perfil ou página da empresa -->
+        <a href="https://www.linkedin.com/in/SEU-PERFIL" target="_blank" rel="noopener">LinkedIn</a>
+        <p class="footer-place">{{ t.footer.lugar }}</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© {{ year }} {{ t.footer.direitos }}</p>
+      </div>
+    </div>
+  </footer>
+}
