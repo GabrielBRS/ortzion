@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "sgt_frontend_principal_company_page": {
+    "ortzion_frontend_principal_company_page": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -70,10 +70,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sgt_frontend_principal_company_page:build:production"
+              "buildTarget": "ortzion_frontend_principal_company_page:build:production"
             },
             "development": {
-              "buildTarget": "sgt_frontend_principal_company_page:build:development"
+              "buildTarget": "ortzion_frontend_principal_company_page:build:development"
             }
           },
           "defaultConfiguration": "development"

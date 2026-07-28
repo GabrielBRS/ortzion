@@ -1,0 +1,36 @@
+{
+  "history": [
+    {
+      "at": "2026-07-28T18:52:17-03:00",
+      "tag": "20260728-185204-dc99df80",
+      "image": "local/pizzaamore-frontend:20260728-185204-dc99df80",
+      "digest": "dc99df801610c998efcf7b28278335a5d2488701fb3d832cc5667a11e12f1149",
+      "namespace": "pizzaamore",
+      "deployment": "pizzaamore"
+    },
+    {
+      "at": "2026-07-28T18:57:57-03:00",
+      "tag": "20260728-185744-16534893",
+      "image": "local/pizzaamore-frontend:20260728-185744-16534893",
+      "digest": "16534893de151bfb02ecc2d4bf7095d0ec2dd347f2abd87d16aa695059a3ad3b",
+      "namespace": "pizzaamore",
+      "deployment": "pizzaamore"
+    },
+    {
+      "at": "2026-07-28T19:53:49-03:00",
+      "tag": "20260728-195341-7fd783a8",
+      "image": "local/ortzion-frontend:20260728-195341-7fd783a8",
+      "digest": "7fd783a80b82c132346e2b925617fa1920cc204906ec7ca9e314bcad9ad6bfd8",
+      "namespace": "ortzion-home-page-front",
+      "deployment": "ortzion-home-page-front"
+    },
+    {
+      "at": "2026-07-28T20:18:57-03:00",
+      "tag": "20260728-201843-63d079ed",
+      "image": "local/ortzion-frontend:20260728-201843-63d079ed",
+      "digest": "63d079ed1312380d6121aa2bc1071b1a04685963f180e2102c20f92d6200d373",
+      "namespace": "ortzion-home-page-front",
+      "deployment": "ortzion-home-page-front"
+    }
+  ]
+}

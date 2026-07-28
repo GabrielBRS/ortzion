@@ -1,0 +1,3 @@
+python deploy\iac.py doctor
+
+python deploy\iac.py deploy --force

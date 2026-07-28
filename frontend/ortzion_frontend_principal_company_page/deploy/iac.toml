@@ -1,0 +1,32 @@
+# Orquestrador de deploy — site institucional da Ortzion.
+# Colocar em <raiz-do-projeto-angular>/deploy/iac.toml
+
+[remote]
+host    = "192.168.15.200"
+user    = "gabrielsousa"
+port    = 22
+workdir = "/tmp/iac-ortzion"
+
+[k8s]
+namespace       = "ortzion-home-page-front"
+deployment      = "ortzion-home-page-front"
+container       = ""                       # vazio = autodetecta via kubectl
+ingress_host    = "ortzion.com"            # host usado pelo verify
+ingress_hosts   = ["ortzion.com", "www.ortzion.com"]
+rollout_timeout = 180
+verify_paths    = ["/", "/pt/", "/en/", "/es/", "/pt/consultoria", "/pt/servicos", "/pt/produtos", "/pt/contato"]
+verify_tries    = 3
+verify_contains = "<app-root"              # trecho obrigatório na home
+
+[build]
+mode       = "artifact"
+command    = ["npm", "run", "build"]
+# CONFIRA no angular.json: o caminho usa o nome do PROJETO, não o da pasta.
+dist       = "dist/ortzion_frontend_principal_company_page/browser"
+dockerfile = "deploy/Dockerfile.runtime"
+nginx_conf = "deploy/nginx.conf"
+
+[image]
+repository    = "local/ortzion-frontend"
+keep          = 5
+containerd_ns = "k8s.io"
