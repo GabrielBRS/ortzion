@@ -66,7 +66,7 @@ Depois: Deployment + Service + Ingress para `ortzion.com`/`www.ortzion.com` (ing
 
 - `URL_SITE_CONSULTORIA` em `core/i18n/idiomas.ts` aponta para `https://consultoria.ortzion.com` — trocar pela URL real do site da consultoria.
 - Substituir o sol provisório pelo emblema oficial (leão alado) quando ele existir — header e favicon.
-- URL real do LinkedIn (footer, Contato e JSON-LD do `index.html` — placeholder `SEU-PERFIL`).
+- URL real do LinkedIn (footer, Contato e JSON-LD do `index.html` — placeholder `[SEU-PERFIL](https://www.linkedin.com/company/ortzion-technology)`).
 - Gerar `public/og-cover.png` (1200×630) e descomentar a meta `og:image` no `index.html`.
 - Editar/adicionar itens de **Notícias** nos três dicionários (`noticias.itens`).
 - Revisar os textos de **Produtos** conforme o que for público sobre SmartFinance e MaisClinical.
