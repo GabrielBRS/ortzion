@@ -1,0 +1,12 @@
+/home/gabrielsousa/workspace/ortzion/gateway/ortzion_gateway/target/debug/deps/serde-8893d26ab13ed620.d: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /home/gabrielsousa/workspace/ortzion/gateway/ortzion_gateway/target/debug/build/serde-5c73252a107c8168/out/private.rs
+
+/home/gabrielsousa/workspace/ortzion/gateway/ortzion_gateway/target/debug/deps/libserde-8893d26ab13ed620.rmeta: /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /home/gabrielsousa/workspace/ortzion/gateway/ortzion_gateway/target/debug/build/serde-5c73252a107c8168/out/private.rs
+
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/home/gabrielsousa/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/home/gabrielsousa/workspace/ortzion/gateway/ortzion_gateway/target/debug/build/serde-5c73252a107c8168/out/private.rs:
+
+# env-dep:OUT_DIR=/home/gabrielsousa/workspace/ortzion/gateway/ortzion_gateway/target/debug/build/serde-5c73252a107c8168/out
