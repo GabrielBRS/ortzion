@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 420" role="img" aria-labelledby="title desc">
+  <title id="title">Orzyon AI Systems Engineering</title>
+  <desc id="desc">Orzyon horizontal brand signature.</desc>
+  <defs>
+    <linearGradient id="blue" x1="72" y1="38" x2="362" y2="370" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#20D7FF"/>
+      <stop offset="0.46" stop-color="#2587FF"/>
+      <stop offset="1" stop-color="#3156D9"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(22 22) scale(.73)" fill="none" stroke="url(#blue)" stroke-width="48" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M212 72H136A184 184 0 0 0 72 256a184 184 0 0 0 140 178"/>
+    <path d="M300 72h76a184 184 0 0 1 64 184 184 184 0 0 1-140 178"/>
+    <path d="M152 178l104 86 104-86M256 264v174"/>
+  </g>
+  <text x="430" y="235" fill="#F4F7FB" font-family="Montserrat, Inter, Arial, sans-serif" font-size="170" font-weight="700" letter-spacing="13">ORZYON</text>
+  <text x="438" y="315" fill="#7C93B2" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="600" letter-spacing="13">AI SYSTEMS ENGINEERING</text>
+</svg>

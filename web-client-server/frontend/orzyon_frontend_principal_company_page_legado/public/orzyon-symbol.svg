@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Orzyon symbol</title>
+  <desc id="desc">Open circular O containing a geometric Y.</desc>
+  <defs>
+    <linearGradient id="blue" x1="96" y1="64" x2="416" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#20D7FF"/>
+      <stop offset="0.46" stop-color="#2587FF"/>
+      <stop offset="1" stop-color="#3156D9"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#blue)" stroke-width="48" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M212 72H136A184 184 0 0 0 72 256a184 184 0 0 0 140 178"/>
+    <path d="M300 72h76a184 184 0 0 1 64 184 184 184 0 0 1-140 178"/>
+    <path d="M152 178l104 86 104-86M256 264v174"/>
+  </g>
+</svg>

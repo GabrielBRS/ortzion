@@ -1,0 +1,46 @@
+---
+description: Mandatory engineering standards for all C++ development in this repository.
+globs: ["**/*.cpp", "**/*.cppm", "**/*.cc", "**/*.cxx", "**/xmake.lua"]
+alwaysApply: true
+---
+
+# Mandatory C++ Engineering Standard
+
+Before generating, modifying, refactoring, reviewing, or suggesting C++ code:
+
+1. Read `@.ai/cpp-engineering-standard.json`.
+2. Treat its contents as mandatory engineering requirements.
+3. Inspect the relevant existing source files before modifying architecture.
+4. Inspect `@xmake.lua` when adding files, modules, targets, dependencies, compiler options, or tests.
+
+The project uses:
+
+- C++26
+- Modern C++ only
+- C++ Modules
+- `.cppm` module interfaces
+- XMake
+- Clang
+- RAII
+- explicit ownership
+- value semantics
+- memory-safe patterns wherever C++ permits them
+
+Do not silently fall back to legacy C++ patterns.
+
+Do not introduce CMake, Makefiles, `.h`, or `.hpp` files unless the existing repository explicitly requires interoperability with something that cannot use C++ Modules.
+
+Before completing a change, verify:
+
+- ownership
+- object lifetimes
+- dangling references
+- undefined behavior
+- concurrency safety
+- error handling
+- unnecessary allocations/copies
+- C++26 compatibility
+- module boundaries
+- XMake integration
+
+When a requested implementation conflicts with `.ai/cpp-engineering-standard.json`, follow the engineering standard unless the user explicitly overrides it.

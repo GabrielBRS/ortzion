@@ -1,0 +1,267 @@
+{
+  "$schema": "cpp-engineering-standard-v1",
+
+  "identity": {
+    "name": "Modern Safe C++ Engineering Standard",
+    "version": "1.0.0",
+    "priority": "mandatory"
+  },
+
+  "language": {
+    "language": "C++",
+    "standard": "C++26",
+    "minimum_standard": "C++26",
+    "prefer_latest_supported_features": true,
+    "legacy_cpp": false
+  },
+
+  "build_system": {
+    "primary": "XMake",
+    "required_file": "xmake.lua",
+    "do_not_generate": [
+      "CMakeLists.txt",
+      "Makefile",
+      "meson.build"
+    ],
+    "package_manager": "XMake Package Manager"
+  },
+
+  "compiler": {
+    "preferred": "Clang",
+    "tooling": [
+      "clang++",
+      "clangd",
+      "clang-format",
+      "clang-tidy"
+    ]
+  },
+
+  "modules": {
+    "enabled": true,
+    "preferred_over_headers": true,
+    "interface_extension": ".cppm",
+    "implementation_extension": ".cpp",
+    "avoid_new_h_files": true,
+    "avoid_new_hpp_files": true,
+    "preferred_patterns": [
+      "export module",
+      "import",
+      "export import",
+      "module partitions"
+    ]
+  },
+
+  "memory_management": {
+    "strategy": "RAII",
+    "ownership_must_be_explicit": true,
+
+    "prefer": [
+      "automatic storage duration",
+      "value semantics",
+      "std::unique_ptr",
+      "std::shared_ptr only when ownership is genuinely shared",
+      "std::weak_ptr for breaking shared ownership cycles",
+      "std::vector",
+      "std::array",
+      "std::span",
+      "std::string",
+      "std::string_view"
+    ],
+
+    "forbid_for_ownership": [
+      "raw owning pointers",
+      "new",
+      "delete",
+      "new[]",
+      "delete[]",
+      "malloc",
+      "calloc",
+      "realloc",
+      "free"
+    ],
+
+    "raw_pointer_policy": "Raw pointers are allowed only for non-owning nullable observation or low-level interoperability."
+  },
+
+  "modern_cpp": {
+    "prefer": [
+      "RAII",
+      "value semantics",
+      "const correctness",
+      "constexpr",
+      "consteval when appropriate",
+      "concepts",
+      "requires",
+      "ranges",
+      "std::expected",
+      "std::optional",
+      "std::variant",
+      "std::span",
+      "std::string_view",
+      "std::unique_ptr",
+      "std::jthread",
+      "std::stop_token",
+      "structured bindings",
+      "designated initializers",
+      "enum class",
+      "[[nodiscard]]",
+      "strong types"
+    ]
+  },
+
+  "type_safety": {
+    "avoid": [
+      "C-style casts",
+      "implicit narrowing conversions",
+      "magic integers",
+      "unscoped enums",
+      "void pointers when a typed alternative exists"
+    ],
+
+    "reinterpret_cast": {
+      "default": "avoid",
+      "allowed": "only for justified low-level systems or interoperability code"
+    },
+
+    "static_cast": {
+      "allowed": true,
+      "require_intentional_use": true
+    }
+  },
+
+  "error_handling": {
+    "expected_failures": "prefer std::expected",
+    "optional_values": "prefer std::optional",
+    "programmer_errors": "assertions or contracts when supported",
+    "exceptions": {
+      "policy": "use only when appropriate to the architecture",
+      "do_not_use_for_normal_control_flow": true
+    }
+  },
+
+  "concurrency": {
+    "prefer": [
+      "std::jthread",
+      "std::stop_token",
+      "std::scoped_lock",
+      "std::lock_guard",
+      "std::atomic when appropriate",
+      "message passing when appropriate"
+    ],
+
+    "avoid": [
+      "detached threads without explicit lifetime design",
+      "manual mutex lock/unlock pairs",
+      "shared mutable state when unnecessary"
+    ]
+  },
+
+  "architecture": {
+    "principles": [
+      "explicit ownership",
+      "clear lifetime boundaries",
+      "composition over inheritance unless polymorphism is required",
+      "small focused modules",
+      "low coupling",
+      "high cohesion",
+      "dependency direction must be explicit",
+      "avoid unnecessary abstraction",
+      "zero-cost abstractions when practical"
+    ]
+  },
+
+  "performance": {
+    "principles": [
+      "do not optimize blindly",
+      "measure before optimizing",
+      "avoid unnecessary allocations",
+      "avoid unnecessary copies",
+      "prefer move semantics when meaningful",
+      "prefer contiguous data structures when appropriate",
+      "consider cache locality",
+      "prefer compile-time computation where useful"
+    ]
+  },
+
+  "security_and_safety": {
+    "rules": [
+      "never return references or views to expired objects",
+      "never create dangling pointers",
+      "never create dangling std::string_view",
+      "validate external input",
+      "check integer conversions",
+      "avoid unchecked buffer access in security-sensitive code",
+      "make resource ownership obvious"
+    ]
+  },
+
+  "sanitizers": {
+    "debug": [
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
+    ],
+    "concurrency_testing": [
+      "ThreadSanitizer"
+    ]
+  },
+
+  "static_analysis": {
+    "required": [
+      "clang-tidy"
+    ],
+    "recommended": [
+      "compiler warnings"
+    ]
+  },
+
+  "warnings": {
+    "treat_seriously": true,
+    "preferred": [
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic"
+    ]
+  },
+
+  "testing": {
+    "requirements": [
+      "new behavior should be testable",
+      "bug fixes should include regression tests when practical",
+      "boundary conditions must be considered",
+      "ownership and lifetime behavior must be considered"
+    ]
+  },
+
+  "code_generation": {
+    "before_generating_cpp": [
+      "read this entire configuration",
+      "inspect existing project architecture",
+      "inspect existing modules",
+      "inspect xmake.lua",
+      "follow existing naming conventions",
+      "prefer existing abstractions over introducing duplicates"
+    ],
+
+    "after_generating_cpp": [
+      "verify C++26 compatibility",
+      "verify ownership and lifetime correctness",
+      "verify module boundaries",
+      "verify XMake integration",
+      "look for undefined behavior",
+      "look for unnecessary allocations",
+      "look for dangling references",
+      "look for thread-safety problems"
+    ]
+  },
+
+  "forbidden_defaults": [
+    "do not generate legacy C++ patterns",
+    "do not generate raw owning pointers",
+    "do not generate naked new/delete",
+    "do not introduce headers when a module is appropriate",
+    "do not introduce CMake",
+    "do not use C idioms when a safer C++ abstraction exists",
+    "do not introduce a dependency without justification",
+    "do not suppress compiler warnings merely to make code compile"
+  ]
+}
