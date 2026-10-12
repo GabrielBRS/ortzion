@@ -1,0 +1,162 @@
+# AI Cloud Platform Inference Engine — Build e Execução
+
+Motor de inferência escrito em **Mojo 1.0** que gerencia as engines de
+`/inference` (max-local, ollama, vllm) e os modelos de `/models`
+(qwenn, deepseek, embeddings, ollama). Recebe requisições via API HTTP,
+escolhe a engine e o modelo, executa e devolve o resultado.
+
+## Pré-requisitos
+
+- Linux (testado em Ubuntu/Debian)
+- Ambiente pixi do `max-local` já instalado em
+  `inference/max-local/.pixi/envs/default` (fornece o compilador `mojo`
+  e o runtime MAX)
+
+## Estrutura
+
+```
+main.mojo            — entry point do servidor (loop HTTP)
+src/registry.mojo    — catálogo: varre /inference e /models
+src/router.mojo      — escolha da engine (explícita ou automática)
+src/handler.mojo     — rotas da API e adaptadores de inferência
+src/bridge.py        — cola de sistema (sockets, subprocess) via interop Python
+run.sh               — script de build + execução
+inference-engine     — binário compilado (gerado pelo build)
+```
+
+## Build
+
+O `run.sh` compila automaticamente se o binário não existir. Para compilar
+manualmente:
+
+```bash
+export CONDA_PREFIX="$PWD/inference/max-local/.pixi/envs/default"
+export MODULAR_HOME="$CONDA_PREFIX/share/max"
+export MODULAR_MOJO_MAX_IMPORT_PATH="$CONDA_PREFIX/lib/mojo"
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib"
+
+"$CONDA_PREFIX/bin/mojo" build main.mojo -o inference-engine
+```
+
+Para forçar rebuild (após editar o código):
+
+```bash
+rm -f inference-engine && ./run.sh
+```
+
+## Execução
+
+```bash
+./run.sh                    # sobe na porta 7880 (padrão)
+./run.sh --port 9000        # porta customizada
+PORT=9000 ./run.sh          # idem, via variável de ambiente
+```
+
+Saída esperada:
+
+```
+registry: 3 engines, 4 models found
+ai_cloud_platform_inference_engine listening on 0.0.0.0:7880
+```
+
+> Nota: a porta padrão é **7880** porque a porta originalmente desejada
+> (78080) é inválida — portas TCP vão até 65535.
+
+Para parar o servidor: `Ctrl+C` no terminal, ou `kill $(cat /tmp/engine.pid)`
+se estiver em background.
+
+## Chamadas curl
+
+Importante: use os comandos em **linha única** (sem `\` de continuação —
+ao colar no terminal, a quebra de linha corrompe o comando).
+
+### Status e catálogo
+
+```bash
+curl -s http://localhost:7880/health
+```
+
+```bash
+curl -s http://localhost:7880/v1/engines
+```
+
+```bash
+curl -s http://localhost:7880/v1/models
+```
+
+### Re-varrer os diretórios (após instalar engines/modelos novos)
+
+```bash
+curl -s -X POST http://localhost:7880/v1/scan
+```
+
+### Carregar um modelo
+
+Marca o modelo como carregado e devolve o `serve_command` para servi-lo
+de forma persistente:
+
+```bash
+curl -s -X POST http://localhost:7880/v1/load -d '{"model":"qwenn/Qwen2.5-0.5B-Instruct"}'
+```
+
+Escolhendo a engine explicitamente:
+
+```bash
+curl -s -X POST http://localhost:7880/v1/load -d '{"engine":"max-local","model":"qwenn/Qwen3-4B"}'
+```
+
+### Inferência
+
+Seleção automática de engine (o router escolhe pela família do modelo):
+
+```bash
+curl -s -X POST http://localhost:7880/v1/infer -d '{"model":"qwenn/Qwen2.5-0.5B-Instruct","prompt":"Explique o que é uma API em uma frase"}'
+```
+
+Seleção explícita:
+
+```bash
+curl -s -X POST http://localhost:7880/v1/infer -d '{"engine":"max-local","model":"qwenn/Qwen2.5-0.5B-Instruct","prompt":"Olá!"}'
+```
+
+Resposta (exemplo real):
+
+```json
+{
+  "engine": "max-local",
+  "model": "qwenn/Qwen2.5-0.5B-Instruct",
+  "command": ".../max generate --model-path ... --prompt ...",
+  "exit_code": 0,
+  "output": "Uma API é...",
+  "stderr": "..."
+}
+```
+
+Para formatar o JSON na saída, adicione `| python3 -m json.tool` ao final
+de qualquer chamada.
+
+## Regras de seleção automática de engine
+
+| Família do modelo | Engine escolhida |
+|---|---|
+| `ollama` | ollama |
+| `embeddings` | vllm (fallback: max-local) |
+| `qwenn` / `deepseek` | max-local (fallback: vllm, ollama) |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|---|---|---|
+| `Address already in use` | já existe um servidor na porta | `kill $(cat /tmp/engine.pid)` ou use `--port` |
+| `{"error":"missing field: model"}` | corpo vazio (quebra de linha ao colar) | rode o curl em linha única |
+| `{"error":"engine not available: ollama"}` | engine sem binário instalado | instale o ollama/vllm e rode `POST /v1/scan` |
+| `{"error":"model not found: X"}` | nome errado | confira os ids em `GET /v1/models` (aceita `nome` ou `familia/nome`) |
+
+## Limitações conhecidas
+
+- O servidor processa **uma requisição por vez**; durante uma inferência
+  as demais aguardam.
+- `/v1/infer` executa em modo one-shot (cada chamada carrega o modelo; a
+  primeira é mais lenta por causa da compilação de kernels do MAX).
+- Apenas `max-local` está instalada; `ollama` e `vllm` aparecem no
+  catálogo mas retornam 503 até que seus binários sejam instalados.

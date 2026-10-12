@@ -1,0 +1,29 @@
+# Orzyon Consulting — workload existente no Rancher/RKE2.
+[remote]
+host = "2804:214:4013:31fc:c247:eff:fef6:801a"
+user = "gabrielsousa"
+port = 22
+workdir = "/tmp/iac-orzyon-consultancy"
+
+[k8s]
+namespace = "consultancy"
+deployment = "consultancy"
+container = "consultancyorzyon-web"
+ingress_host = "consultancy.orzyon.ai"
+ingress_hosts = ["consultancy.orzyon.ai"]
+rollout_timeout = 180
+verify_paths = ["/", "/healthz", "/favicon.svg", "/orzyon-symbol.svg", "/robots.txt", "/sitemap.xml"]
+verify_tries = 3
+verify_contains = "Sua próxima ideia."
+
+[build]
+mode = "artifact"
+command = ["npm", "run", "build"]
+dist = "dist/sgt_frontend_consultancy_company_page/browser"
+dockerfile = "deploy/Dockerfile.runtime"
+nginx_conf = "deploy/nginx.conf"
+
+[image]
+repository = "local/orzyon-consultancy"
+keep = 5
+containerd_ns = "k8s.io"

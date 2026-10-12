@@ -1,0 +1,11 @@
+# Na raiz do projeto (Python 3.11+, Node 24+, npm e chave SSH configurada):
+npm ci
+python3 deploy/iac.py doctor
+python3 deploy/iac.py deploy --dry-run
+python3 deploy/iac.py deploy --host 2804:214:4013:31fc:c247:eff:fef6:801a --user gabrielsousa --no-prune --auto-rollback
+python3 deploy/iac.py status
+python3 deploy/iac.py rollback
+
+# O deployment, Service e Ingress já existem no namespace consultancy.
+# Use deploy para atualizar a imagem preservando selectors do Rancher.
+# Não use apply para substituir os recursos existentes.

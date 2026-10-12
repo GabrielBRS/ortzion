@@ -1,0 +1,375 @@
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="#" aria-label="Orzyon Consulting — início"
+      ><img src="orzyon-symbol.svg" width="38" height="38" alt="" /><span
+        >ORZYON<small>CONSULTING</small></span
+      ></a
+    >
+    <button
+      class="menu-toggle"
+      type="button"
+      (click)="menuOpen.set(!menuOpen())"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="navigation"
+    >
+      {{ menuOpen() ? 'Fechar ×' : 'Menu ☰' }}
+    </button>
+    <nav
+      id="navigation"
+      aria-label="Navegação principal"
+      [class.open]="menuOpen()"
+      (click)="menuOpen.set(false)"
+    >
+      <a href="#servicos">O que fazemos</a><a href="#ecossistema">Ecossistema</a
+      ><a href="#como-trabalhamos">Como trabalhamos</a
+      ><a class="header-cta" href="#contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+<main id="conteudo">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          <span class="status-dot"></span> ORZYON CONSULTING / ENGENHARIA APLICADA
+        </p>
+        <h1 id="hero-title">Sua próxima ideia.<br />Nosso próximo<br /><em>grande projeto.</em></h1>
+        <p class="hero-description">
+          Transformamos desafios de negócio em produtos, sistemas de IA e integrações que funcionam
+          no mundo real. Da primeira decisão de arquitetura à operação.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#contato"
+            >Conte seu projeto <span aria-hidden="true">↗</span></a
+          ><a class="text-link" href="#servicos"
+            >Explore os serviços <span aria-hidden="true">↓</span></a
+          >
+        </div>
+        <p class="hero-note">Engenharia Orzyon. Ao lado da sua empresa.</p>
+      </div>
+      <div
+        class="system-visual"
+        role="img"
+        aria-label="A engenharia Orzyon conecta o produto da sua empresa a sistemas de IA, integrações e infraestrutura de nuvem."
+      >
+        <div class="visual-top"><span>DA IDEIA À OPERAÇÃO</span><span>+</span></div>
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+        <div class="axis axis-x"></div>
+        <div class="axis axis-y"></div>
+        <div class="system-node node-top">
+          <span>01 / INTELIGÊNCIA</span><strong>AI Systems</strong>
+        </div>
+        <div class="system-core">
+          <img src="orzyon-symbol.svg" width="72" height="72" alt="" /><strong>SEU PRODUTO</strong
+          ><span>ENGINEERED BY ORZYON</span>
+        </div>
+        <div class="system-node node-left">
+          <span>02 / CONEXÃO</span><strong>Integrações</strong>
+        </div>
+        <div class="system-node node-right">
+          <span>03 / INFRAESTRUTURA</span><strong>AI Cloud</strong>
+        </div>
+        <div class="visual-bottom">
+          <span>ARQUITETURA → BUILD → DEPLOY</span><span>O / 01</span>
+        </div>
+      </div>
+    </div>
+    <div class="container expertise-strip">
+      <span>DO DESAFIO À ENTREGA</span>
+      <p>Estratégia técnica</p>
+      <b aria-hidden="true">+</b>
+      <p>Desenvolvimento</p>
+      <b aria-hidden="true">+</b>
+      <p>Integração</p>
+      <b aria-hidden="true">+</b>
+      <p>Operação</p>
+    </div>
+  </section>
+  <section class="section container" id="servicos" aria-labelledby="services-title">
+    <div class="section-intro">
+      <div>
+        <p class="eyebrow">01 / O QUE FAZEMOS</p>
+        <h2 id="services-title">Engenharia para o que<br />sua empresa precisa construir.</h2>
+      </div>
+      <p>
+        Um novo produto, uma operação mais inteligente ou uma integração complexa. Entramos onde a
+        tecnologia precisa virar entrega.
+      </p>
+    </div>
+    <div class="services-grid">
+      @for (service of services; track service.number) {
+        <article class="service-card">
+          <div class="card-top">
+            <span>{{ service.number }} /</span
+            ><span class="service-mark" aria-hidden="true">{{ service.mark }}</span>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.text }}</p>
+          <ul class="tags">
+            @for (tag of service.tags; track tag) {
+              <li>{{ tag }}</li>
+            }
+          </ul>
+          <a href="#contato" class="card-link"
+            >Conversar sobre
+            {{
+              service.number === '01'
+                ? 'meu produto'
+                : service.number === '02'
+                  ? 'IA'
+                  : service.number === '03'
+                    ? 'integração'
+                    : 'arquitetura'
+            }}
+            <span aria-hidden="true">↗</span></a
+          >
+        </article>
+      }
+    </div>
+  </section>
+  <section class="ecosystem" id="ecossistema" aria-labelledby="ecosystem-title">
+    <div class="container ecosystem-grid">
+      <div>
+        <p class="eyebrow">02 / CONEXÃO COM O ECOSSISTEMA</p>
+        <h2 id="ecosystem-title">
+          Sua empresa.<br />Todo um ecossistema<br /><em>de possibilidades.</em>
+        </h2>
+        <p>
+          Construímos a ponte entre a sua operação e os produtos Orzyon. Ajudamos a avaliar a
+          solução, desenhar a integração e colocar tudo para trabalhar junto.
+        </p>
+        <a class="text-link" href="#contato"
+          >Planejar minha integração <span aria-hidden="true">↗</span></a
+        >
+        <div class="private-note">
+          <span aria-hidden="true">◇</span>
+          <p>
+            <strong>Sua infraestrutura também faz parte.</strong>Projetos em ambiente privado, na
+            nuvem ou em arquitetura híbrida, conforme os requisitos da sua empresa.
+          </p>
+        </div>
+      </div>
+      <div class="product-list">
+        <a
+          class="product featured"
+          [href]="destinations.cloud"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><div class="product-label">
+            <span>INFRAESTRUTURA DE IA</span><span class="badge">DEMONSTRAÇÃO</span>
+          </div>
+          <h3>Orzyon AI Cloud <span aria-hidden="true">↗</span></h3>
+          <p>
+            Clusters, agentes, modelos e compute em um único console. Apoio técnico para conectar
+            sua operação.
+          </p>
+          <span class="product-action"
+            >Explorar a AI Cloud <span class="sr-only">(abre em nova aba)</span></span
+          ></a
+        >
+        <a class="product" [href]="destinations.financial" target="_blank" rel="noopener noreferrer"
+          ><div class="product-label">INTELIGÊNCIA MULTIAGENTE</div>
+          <h3>AI Financial Services <span aria-hidden="true">↗</span></h3>
+          <p>Integração de IA aos dados, ao atendimento e aos processos da operação financeira.</p>
+          <span class="sr-only">Explorar Orzyon AI Financial Services (abre em nova aba)</span></a
+        >
+        <a class="product" [href]="destinations.medical" target="_blank" rel="noopener noreferrer"
+          ><div class="product-label">INTELIGÊNCIA CLÍNICA</div>
+          <h3>AI Medical Services <span aria-hidden="true">↗</span></h3>
+          <p>
+            Conexão com a jornada clínica, considerando privacidade e rastreabilidade desde a
+            arquitetura.
+          </p>
+          <span class="sr-only">Explorar Orzyon AI Medical Services (abre em nova aba)</span></a
+        >
+      </div>
+    </div>
+  </section>
+  <section class="section container" id="como-trabalhamos" aria-labelledby="process-title">
+    <div class="section-intro">
+      <div>
+        <p class="eyebrow">03 / COMO TRABALHAMOS</p>
+        <h2 id="process-title">Próximos do seu time.<br />Do início à próxima etapa.</h2>
+      </div>
+      <p>
+        Clareza nas decisões, escopo bem definido e engenharia conectada ao problema que você
+        precisa resolver.
+      </p>
+    </div>
+    <ol class="steps">
+      @for (step of steps; track step.title; let i = $index) {
+        <li>
+          <span class="step-number">0{{ i + 1 }} <span aria-hidden="true">→</span></span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+    <div class="engagement">
+      <p class="eyebrow">UM FORMATO PARA CADA MOMENTO</p>
+      <div>
+        <h3>Projeto com escopo definido</h3>
+        <p>Para construir um produto, validar uma solução ou realizar uma integração.</p>
+      </div>
+      <div>
+        <h3>Acompanhamento técnico</h3>
+        <p>Para apoiar decisões, complementar seu time e evoluir sistemas continuamente.</p>
+      </div>
+    </div>
+  </section>
+  <section class="contact-section" id="contato" aria-labelledby="contact-title">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">04 / VAMOS CONSTRUIR JUNTOS</p>
+        <h2 id="contact-title">O próximo passo<br />começa com uma<br /><em>boa conversa.</em></h2>
+        <p>
+          Conte o que sua empresa quer construir, melhorar ou integrar. Vamos entender o contexto e
+          definir como a Orzyon pode ajudar.
+        </p>
+        <a class="email-link" [href]="'mailto:' + email"
+          >{{ email }} <span aria-hidden="true">↗</span></a
+        >
+        <p class="contact-location">Brasília–DF, Brasil · Atendimento remoto</p>
+        <a
+          class="portal-link"
+          [href]="destinations.portal"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Já faz parte do ecossistema? Acesse o portal ↗<span class="sr-only">
+            (abre em nova aba)</span
+          ></a
+        >
+      </div>
+      <form
+        #briefingForm="ngForm"
+        (ngSubmit)="prepareBriefing(briefingForm)"
+        (input)="prepared.set(false)"
+        (change)="prepared.set(false)"
+      >
+        <h3>Vamos conhecer seu projeto.</h3>
+        <p class="form-intro">Preencha um breve contexto para iniciar o contato.</p>
+        <div class="form-row">
+          <label for="name"
+            >Seu nome<input
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              pattern=".*\S.*"
+              maxlength="100"
+              [(ngModel)]="briefing.name"
+              placeholder="Como podemos chamar você?" /></label
+          ><label for="company"
+            >Empresa<input
+              id="company"
+              name="company"
+              autocomplete="organization"
+              required
+              pattern=".*\S.*"
+              maxlength="150"
+              [(ngModel)]="briefing.company"
+              placeholder="Nome da sua empresa"
+          /></label>
+        </div>
+        <label for="email"
+          >E-mail de trabalho<input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            email
+            maxlength="200"
+            [(ngModel)]="briefing.email"
+            placeholder="voce@empresa.com.br" /></label
+        ><label for="service"
+          >Como podemos ajudar?<select id="service" name="service" [(ngModel)]="briefing.service">
+            <option>Desenvolvimento de produto</option>
+            <option>IA e automação</option>
+            <option>Integração com produtos Orzyon</option>
+            <option>Integração com a Orzyon AI Cloud</option>
+            <option>Arquitetura e infraestrutura</option>
+            <option>Quero entender as possibilidades</option>
+          </select></label
+        ><label for="message"
+          >Conte um pouco sobre o desafio<textarea
+            id="message"
+            name="message"
+            required
+            minlength="20"
+            pattern="[\s\S]*\S[\s\S]*"
+            maxlength="2000"
+            rows="4"
+            [(ngModel)]="briefing.message"
+            placeholder="O que você quer construir? Em que etapa está? Qual problema precisa resolver?"
+          ></textarea>
+        </label>
+        @if (briefingForm.submitted && briefingForm.invalid) {
+          <p class="form-error" role="alert">
+            Preencha todos os campos, informe um e-mail válido e descreva o desafio em pelo menos 20
+            caracteres.
+          </p>
+        }
+        <p class="form-note">
+          Os dados ficam nesta página até você abrir seu aplicativo de e-mail e enviar a mensagem.
+          Nenhum envio é automático.
+        </p>
+        <button class="button primary" type="submit">
+          Preparar contato <span aria-hidden="true">↗</span>
+        </button>
+        @if (prepared()) {
+          <div class="form-success" role="status">
+            <strong>Seu briefing está pronto.</strong>
+            <p>Abra o e-mail abaixo, revise a mensagem e envie para iniciar a conversa.</p>
+            <a [href]="mailto()">Abrir no meu aplicativo de e-mail ↗</a>
+            <p>Se o aplicativo não abrir, escreva para {{ email }}.</p>
+          </div>
+        }
+      </form>
+    </div>
+  </section>
+  <section class="section container faq" aria-labelledby="faq-title">
+    <div>
+      <p class="eyebrow">ANTES DE COMEÇAR</p>
+      <h2 id="faq-title">Boas perguntas.<br />Respostas diretas.</h2>
+    </div>
+    <div>
+      @for (faq of faqs; track faq.question) {
+        <details>
+          <summary>{{ faq.question }}<span aria-hidden="true">+</span></summary>
+          <p>{{ faq.answer }}</p>
+        </details>
+      }
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="#"
+        ><img src="orzyon-symbol.svg" width="38" height="38" alt="" /><span
+          >ORZYON<small>CONSULTING</small></span
+        ></a
+      >
+      <p>Engenharia de inteligência.<br />Construída com você.</p>
+      <div>
+        <a [href]="destinations.company" target="_blank" rel="noopener noreferrer"
+          >Conheça a Orzyon ↗<span class="sr-only"> (abre em nova aba)</span></a
+        ><a
+          href="https://www.linkedin.com/company/orzyon-technology"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn ↗<span class="sr-only"> (abre em nova aba)</span></a
+        >
+      </div>
+      <a href="#contato">Vamos conversar ↗</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Orzyon Technology · CNPJ 65.268.596/0001-50</span
+      ><span>AI SYSTEMS / PRODUCTS / INTEGRATION</span>
+    </div>
+  </div>
+</footer>

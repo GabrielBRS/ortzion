@@ -1,0 +1,201 @@
+# Prompt para o Codex — Backend Rust da Orzyon Cloud
+
+Implemente o backend da **Orzyon Cloud** em **Rust** e conecte-o ao frontend React existente. Execute o trabalho no repositório, não entregue somente uma proposta. Leia primeiro as instruções do projeto e inspecione suas telas, tipos, rotas, mocks e contratos para preservar a experiência já criada.
+
+## 1. Objetivo desta etapa
+
+Estamos construindo um **protótipo funcional integrado**, ainda não uma cloud de produção. O frontend começou com dados fictícios e ações locais. Nesta etapa, queremos APIs HTTP e persistência reais, com operações de infraestrutura simuladas de maneira explícita.
+
+| Funcionalidade | Implementação nesta etapa |
+| --- | --- |
+| APIs, validações e regras de domínio | Reais, em Rust |
+| Persistência de organizações, clusters e workloads | Real, em PostgreSQL |
+| Integração do frontend com o backend | Real |
+| Login da demonstração | Sessão demonstrativa, sem identidade verificada |
+| Provisionamento de cluster e alteração de capacidade | Simulados e persistidos |
+| Construção e execução de código ou contêiner | Simuladas; nenhum código do cliente é executado |
+| Carregamento de modelos e inferência | Simulados |
+| Telemetria de hardware | Dados sintéticos claramente identificados |
+| Custos e projeções | Cálculos reais sobre tarifas e consumo fictícios |
+| Cobrança, pagamento e emissão fiscal | Fora do escopo |
+
+Não chamar esta entrega de infraestrutura pronta para produção. Não implementar Kubernetes real, acesso a GPUs, execução de processos arbitrários, integrações financeiras ou serviços pagos nesta fase.
+
+## 2. Marca e domínio
+
+A grafia correta é **Orzyon Cloud**. A Orzyon é a operadora da cloud e também uma organização cliente dentro dela. São contextos distintos.
+
+Preservar esta estrutura:
+
+- Organização: proprietária de membros, orçamento e clusters.
+- Cluster de IA: ambiente contratado e configurável da organização.
+- Recursos do cluster: CPU, memória, capacidade de GPU e armazenamento.
+- Agentes: prompts, ferramentas, rotas, configurações e referência à implantação de modelo.
+- Serviços: aplicações com runtime Python, Mojo, Python + Mojo ou imagem personalizada.
+- Implantações de modelos: modelo, motor de inferência, recursos reservados e estado de execução.
+- Motores: software que executa modelos; não confundir motor com pesos do modelo.
+- Pools de computação e nós: infraestrutura global que fornece capacidade aos clusters.
+
+Não duplicar o cluster com outra entidade chamada ambiente. Vários agentes podem compartilhar uma implantação de modelo, sem duplicar sua reserva de memória.
+
+## 3. Stack e organização
+
+- Rust em versão estável compatível com as dependências escolhidas; fixar o toolchain do projeto.
+- Axum para HTTP, Tokio para tarefas assíncronas, Serde para serialização, SQLx para PostgreSQL e migrações, tracing para logs estruturados.
+- OpenAPI com geração por biblioteca compatível, como utoipa.
+- PostgreSQL como banco principal; Docker Compose para subir o ambiente local.
+- Usar versões compatíveis e conferir as APIs reais antes de escrever integrações. Respeitar decisões existentes no repositório quando não conflitarem com Rust e com o escopo.
+- Organizar módulos de domínio, handlers HTTP, serviços de aplicação, persistência, providers simulados, configuração e jobs.
+- Começar como monólito modular. Não criar microserviços, barramento de eventos ou infraestrutura distribuída sem necessidade.
+- Persistir jobs no PostgreSQL e processá-los em worker Tokio no mesmo serviço. Não exigir Redis para o protótipo.
+- Variáveis de ambiente documentadas em .env.example, sem credenciais reais.
+- Incluir encerramento gracioso e endpoints de saúde e prontidão; prontidão verifica o banco.
+
+Rust é a linguagem do backend da plataforma. Python e Mojo continuam sendo os runtimes oferecidos às aplicações dos clientes. Não reescrever o frontend React em Rust nem confundir a linguagem da plataforma com a dos workloads.
+
+## 4. APIs e contratos
+
+Criar APIs JSON versionadas em /api/v1. Derivar contratos das necessidades reais do frontend e documentá-los no OpenAPI.
+
+Cobrir:
+
+- Sessão demonstrativa: entrar, consultar sessão, sair.
+- Organizações, membros fictícios e seleção do contexto.
+- Clusters: listar, consultar, criar, atualizar, redimensionar, pausar, retomar e excluir.
+- Recursos: capacidade, reservas, uso simulado e disponibilidade.
+- Agentes: CRUD, configuração, ativação, pausa, rotas e playground simulado.
+- Catálogo demonstrativo de modelos e motores, implantações e vínculos de agentes.
+- Serviços: configuração, implantação simulada, versões, logs, pausa e remoção.
+- Jobs: consulta de andamento e resultado das operações assíncronas.
+- Métricas: filtros de organização, cluster, workload e período.
+- Custos: consumo ilustrativo, projeções, orçamento, tarifas e exportação CSV.
+- Eventos de auditoria e atividade recente.
+- Operação global: pools, nós e alocações por organização, apenas para perfil operador.
+
+Utilizar códigos HTTP coerentes: criação síncrona 201, operação assíncrona 202 com identificador de job, ausência 404, acesso negado 403, conflito de capacidade ou dependências 409 e erros de entrada 400 ou 422 conforme convenção documentada.
+
+Padronizar erros com código estável, mensagem legível, detalhes de validação e identificador de requisição. Não expor stack traces ou conteúdo sensível na resposta.
+
+Aplicar paginação, filtros permitidos e limites de tamanho nas listagens e entradas. Usar identificadores UUID e timestamps em UTC, deixando a apresentação local ao frontend. Valores monetários devem usar centavos inteiros ou decimal exato, sem ponto flutuante binário como fonte de verdade.
+
+## 5. Sessão demonstrativa e escopo de acesso
+
+Manter a entrada com um clique, sem credenciais reais. O frontend chama um endpoint de início de sessão demo e recebe uma sessão opaca com expiração, preferencialmente em cookie HttpOnly. Não coletar ou persistir senha digitada no login demonstrativo.
+
+- Ativar esse mecanismo somente por configuração explícita de modo demonstrativo.
+- Se o modo demo estiver desativado e não houver provedor real de identidade, rejeitar a criação de sessão; não liberar acesso silenciosamente.
+- Usar perfis fictícios de operador e cliente e memberships persistidas para organizações de exemplo.
+- A alternância de persona pode existir apenas no modo demonstrativo. Não aceitar campos arbitrários de usuário ou role enviados pelo frontend como autorização.
+- Validar no servidor o acesso à organização em todas as consultas e mutações. Um identificador de organização na URL ou cabeçalho não é prova de permissão.
+- Aplicar checagem de origem/CSRF adequada ao uso de cookies e restringir CORS às origens de desenvolvimento configuradas. Não combinar credenciais com origem curinga.
+- Não registrar cookies, tokens ou prompts completos nos logs gerais.
+
+Essa estrutura valida o comportamento de autorização da aplicação, mas o login demo não verifica a identidade de uma pessoa. Não apresentá-lo como autenticação de produção. Vincular serviços locais a loopback por padrão e não publicar a aplicação na internet nesta etapa.
+
+## 6. Banco e regras de integridade
+
+Criar migrações versionadas e seeds idempotentes. Modelar tabelas e relacionamentos suficientes para organizações, memberships, sessões, pools, nós, clusters, alocações, agentes, serviços, implantações, jobs, eventos e orçamentos.
+
+- Garantir que relações entre agente, cluster, modelo e serviço não atravessem organizações indevidamente.
+- Aplicar constraints de banco e transações para integridade de reservas e estados.
+- Usar controle de concorrência nas alterações de capacidade, evitando que duas requisições simultâneas reservem o mesmo saldo.
+- Aplicar idempotência nas operações de criação/provisionamento que possam ser repetidas por retry. A chave deve ser escopada à organização/operação; mesma chave com payload diferente deve gerar conflito.
+- Não permitir exclusão de modelo em uso por agentes.
+- Não permitir excluir cluster com dependências ativas; responder informando os recursos que precisam ser removidos. Não adicionar exclusão em cascata silenciosa.
+- Não permitir reduzir capacidade abaixo das reservas existentes.
+- Definir claramente quando pausa preserva a reserva e quando remoção libera recursos. Usar a mesma regra na API, interface e estimativa de custos.
+
+## 7. Recursos, AMD e memória
+
+Modelar dois perfis diferentes:
+
+1. Memória unificada: um único orçamento físico compartilhado entre CPU e GPU, com limite/parcela configurada para GPU.
+2. Memória dedicada: RAM e VRAM independentes, além da quantidade e capacidade das GPUs.
+
+Nunca contar a mesma memória unificada duas vezes. Normalizar armazenamento de memória e disco em bytes, exibindo GiB/TiB de maneira consistente no frontend. CPU pode usar millicores ou representação equivalente documentada.
+
+Preservar capacidade por nó e topologia básica. Não aceitar uma implantação que requer mais memória local que a disponível apenas porque a soma do cluster é grande. Modelos distribuídos podem permanecer fora do escopo; nesse caso, rejeitar explicitamente configurações que dependeriam desse suporte.
+
+Na simulação, validar alocação do pool para o cluster e do cluster para os workloads. Pool virtual compartilhado e cluster dedicado devem ter regras explícitas de reserva, mesmo que simplificadas. Não simular alocação de hardware ilimitado.
+
+Não prometer compatibilidade oficial de hardware AMD, modelos ou motores sem homologação. Dados de hardware no seed são exemplos, não benchmarks ou inventário real.
+
+## 8. Providers e processamento assíncrono
+
+Definir interfaces claras para provisionamento, build/deploy, inferência e telemetria. Implementar apenas providers simulados nesta etapa, com contratos úteis para integração futura.
+
+Um pedido de implantação deve criar registro e job de forma transacional, retornar rapidamente e avançar por estados válidos, como Pendente, Preparando, Disponível ou Falha. O frontend acompanha por polling moderado ou SSE; escolher a solução mais simples já compatível com o projeto.
+
+- Persistir estado e progresso do job.
+- Definir retomada ou reprocessamento idempotente após reinício do backend, evitando jobs presos para sempre ou recursos reservados em duplicidade.
+- Usar tentativas limitadas e registrar erro legível.
+- Para o protótipo com um worker, documentar essa limitação. Evitar execução simultânea do mesmo job; não prometer operação distribuída sem implementá-la.
+- Simular tempos curtos, suficientes para visualizar o progresso.
+- Fornecer cenários determinísticos de sucesso e falha para verificação, sem falhas aleatórias durante demonstrações normais.
+- Não criar processos de compilação, executar comandos de usuários, puxar imagens, acessar endpoints fornecidos por clientes ou disparar requisições a repositórios arbitrários.
+
+O playground retorna respostas fictícias identificadas como simuladas. As referências de imagem e arquivos enviados são apenas configurações/metadados; limitar tamanho e não interpretar conteúdo como comando.
+
+## 9. Métricas e custos
+
+Gerar séries sintéticas determinísticas e identificadas como simuladas. Os filtros devem mudar o resultado. Distinguir métricas técnicas reais do próprio backend de métricas fictícias dos clusters.
+
+- Métricas do produto: requisições, tokens, latência p50/p95, erros, fila, CPU, memória e GPU.
+- Documentar que percentis agregados não são calculados por média simples de percentis de agentes. Usar amostras sintéticas comuns ou agregação consistente.
+- Orçamento contratado, recurso reservado e utilização observada são conceitos distintos.
+- Definir tarifas ilustrativas centralizadas, com versão e unidade.
+- Calcular consumo acumulado e projeção mensal separadamente, com período de referência claro.
+- Não somar cobrança de capacidade reservada e de tokens sobre o mesmo custo sem uma regra explícita.
+- Histórico de eventos de capacidade deve permitir cálculo coerente após redimensionamento; não aplicar retroativamente a nova tarifa/capacidade ao mês inteiro.
+- Implementar alertas de orçamento e ao menos bloqueio de novas alocações quando essa política estiver configurada. Outras políticas expostas na interface devem ter comportamento simulado correspondente ou indicação clara de indisponibilidade.
+- Exportar CSV pelo backend.
+
+Todos os preços e dados de consumo do protótipo são fictícios. Não criar pagamentos ou faturas fiscais reais.
+
+## 10. Integração com o React
+
+- Substituir os serviços mock do frontend por um cliente HTTP tipado, preservando os componentes e a navegação existentes.
+- Configurar a URL do backend por variável de ambiente.
+- PostgreSQL passa a ser a fonte de verdade dos dados do produto. localStorage pode manter preferências visuais, não cópias independentes das entidades.
+- Aguardar confirmação da API em mutações ou implementar rollback correto se optar por atualização otimista.
+- Tratar carregamento, indisponibilidade, sessão expirada, falta de permissão, conflito de capacidade, erro de validação e estado vazio.
+- Atualizar ou invalidar caches após mutações e troca de organização.
+- Manter rótulo de demonstração e estados simulados visíveis. Não substituir falhas de API silenciosamente por dados mock.
+- Revisar fluxos de criação, edição, pause/resume, exclusão, orçamento e seleção de modelos para que realmente usem a API.
+- Se existir modo frontend-only, mantê-lo somente atrás de configuração explícita; o modo integrado deve ser verificável e padrão para esta entrega.
+
+## 11. Dados de demonstração
+
+Seed com organizações “Orzyon” e “Governo — Demonstração”. Na Orzyon, clusters “Orzyon — Produção” e “Orzyon — Laboratório”. No governo fictício, clusters “Receita Federal”, “Ministério da Justiça” e “Ministério da Economia”. Não apresentar essas instituições como clientes reais.
+
+Criar perfis de modelo fictícios, agentes com prompts de exemplo, serviços Python/Mojo, um modelo compartilhado por vários agentes, recursos suficientes e métricas coerentes. Incluir pelo menos um pool com memória unificada e outro cenário com memória dedicada se o frontend o oferecer.
+
+O reset da demonstração deve atuar somente sobre os dados seed identificados, exigir perfil operador demo e confirmação e estar indisponível fora desse modo. Não criar endpoint genérico que apaga todo o banco sem escopo.
+
+## 12. Verificação e entrega
+
+Adicionar testes significativos para riscos reais:
+
+- Isolamento entre organizações e bloqueio do perfil cliente na administração global.
+- Reserva concorrente de recursos sem ultrapassar capacidade.
+- Memória unificada sem dupla contagem.
+- Compartilhamento de modelo entre agentes sem duplicar memória dos pesos.
+- Redução de capacidade e exclusão com dependências.
+- Idempotência de provisionamento e retomada de jobs após reinício.
+- Cálculo de custo com tarifas fictícias e mudança de capacidade.
+- Persistência e fluxo integrado básico.
+
+Executar cargo fmt, cargo clippy e cargo test, além do build e checagem de tipos do frontend. Corrigir problemas do escopo. Se o ambiente não permitir executar algum check, registrar a limitação concreta sem afirmar que passou.
+
+Entregar:
+
+1. Backend Rust implementado e frontend conectado.
+2. Migrações e seed idempotente.
+3. Docker Compose para desenvolvimento e .env.example.
+4. OpenAPI e exemplos de chamadas que não contenham segredos.
+5. README com comandos exatos para subir, migrar, popular, testar e reiniciar o ambiente.
+6. Explicação curta das partes reais, das simuladas e dos pontos de integração futura.
+
+Critério final: iniciar o ambiente local, entrar com um clique, criar um cluster, implantar um modelo simulado, associar um agente, testar uma resposta simulada, consultar métricas/custos e reiniciar os serviços mantendo os dados persistidos.
+
+Trabalhe até concluir esse fluxo. Tome decisões rotineiras com base no repositório, sem bloquear por logo, infraestrutura real ou provedor de autenticação. Não publique, não contrate recursos e não execute código de clientes. Preserve alterações preexistentes não relacionadas ao trabalho.

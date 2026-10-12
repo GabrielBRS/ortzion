@@ -1,0 +1,23 @@
+# Rust
+target/
+
+# Node
+node_modules/
+dist/
+
+# Python / ambientes
+.venv/
+__pycache__/
+.pixi/
+
+# IDE
+.idea/
+.vscode/
+
+# Pesos de modelos (grandes demais para o git)
+ai_platform/ai_cloud_platform_inference_engine/models/
+*.safetensors
+*.gguf
+
+# Segredos
+.env

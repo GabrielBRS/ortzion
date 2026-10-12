@@ -1,0 +1,239 @@
+# Prompt para o Codex — Frontend da Orzyon Cloud
+
+Implemente um frontend React completo, navegável e visualmente refinado para a **Orzyon Cloud**, plataforma de contratação e administração de clusters de IA. Execute a implementação no projeto; não entregue apenas um plano, wireframe ou descrição. Este documento é a especificação, não uma página a ser exibida no produto.
+
+## 1. Escopo e marca
+
+- A grafia é sempre **Orzyon Cloud**. Não usar Ozone, Ozion, Orzion ou iCloud.
+- A Orzyon Cloud é a plataforma e a marca do datacenter. A própria Orzyon também é uma organização cliente, com seus clusters e aplicações.
+- Criar somente o frontend nesta etapa, sem backend, autenticação real, cobrança real, provisionamento ou chamadas a modelos reais.
+- Toda a interface deve estar em português do Brasil, com valores monetários em BRL e datas locais.
+- A logo poderá ser fornecida separadamente. Se estiver nos arquivos do projeto ou anexos, utilize-a preservando proporções. Caso contrário, use um wordmark tipográfico provisório “Orzyon Cloud” em um componente substituível. Não bloqueie a implementação esperando a logo.
+
+## 2. Tecnologia e arquitetura do frontend
+
+- Utilizar React e TypeScript. Se o repositório estiver vazio, iniciar com Vite. Se já existir uma base React, preservar suas convenções e aproveitar seus componentes.
+- Utilizar rotas reais de frontend, componentes reutilizáveis, uma biblioteca de gráficos adequada e ícones consistentes. Tailwind CSS, Lucide e Recharts são opções preferenciais caso compatíveis com o projeto.
+- Organizar páginas, componentes, tipos de domínio, dados demonstrativos e serviços simulados separadamente.
+- Implementar uma camada de serviços mock assíncronos que possa futuramente ser substituída por APIs, sem reescrever as telas.
+- Persistir configurações e entidades demonstrativas em localStorage com versão do esquema; persistir somente a sessão fictícia em sessionStorage. Nunca guardar senhas ou segredos reais.
+- Fornecer ação “Restaurar demonstração” para voltar ao estado inicial.
+- Não executar código enviado pelo usuário nem fazer uploads externos. Uploads, builds, deploys e chats serão simulados localmente.
+
+## 3. Modelo do produto
+
+| Entidade | Significado |
+| --- | --- |
+| Organização | Conta proprietária de usuários, orçamento e clusters |
+| Cluster de IA | Ambiente contratado e configurável, com capacidade e limites próprios |
+| Recursos | CPU, memória, GPU e armazenamento contratados e consumidos |
+| Agente | Configuração de comportamento, ferramentas, rotas e modelo utilizado |
+| Serviço | Aplicação ou processo executado no cluster |
+| Implantação de modelo | Modelo carregado por um motor de inferência, podendo atender vários agentes |
+| Motor de inferência | Software de execução dos modelos; distinto dos pesos do modelo |
+| Pool de computação | Conjunto de máquinas da infraestrutura que fornece capacidade aos clusters |
+
+Hierarquia principal: **Organização → Clusters → Agentes, serviços e implantações de modelos**. Recursos pertencem ao cluster. Pools pertencem à infraestrutura operada pela Orzyon Cloud. Não criar outra entidade “ambiente” duplicando o cluster.
+
+Uma organização pode ter vários clusters, e um cluster pode ter vários agentes. Vários agentes podem usar a mesma implantação de modelo; não multiplicar automaticamente a memória dos pesos pelo número de agentes.
+
+## 4. Login demonstrativo
+
+Criar uma tela de login elegante com identidade da marca, campos de e-mail e senha, botão “Entrar” e botão “Explorar demonstração”.
+
+- Ambos os botões devem abrir imediatamente o dashboard com uma sessão fictícia; o login não pode exigir credenciais válidas, integração externa ou preenchimento dos campos.
+- Mostrar discretamente “Ambiente de demonstração — autenticação simulada”.
+- Não enviar nem armazenar o conteúdo do campo de senha.
+- O botão “Sair” limpa a sessão fictícia e retorna ao login.
+- Não adicionar botões de provedores, recuperação de senha ou cadastro sem comportamento definido.
+- O objetivo é clicar e entrar no painel para avaliar o produto. Não implementar segurança real nem sugerir que o login demonstrativo protege dados.
+
+## 5. Direção visual
+
+Criar um console de cloud profissional, sóbrio e moderno, com alta legibilidade, boa densidade de informação e hierarquia clara. Evitar aparência de landing page, excesso de cards vazios, gradientes decorativos e frases promocionais genéricas.
+
+- Tema escuro como padrão, superfícies em grafite, texto claro e uma cor de destaque coerente com a logo quando disponível; provisoriamente, azul-ciano.
+- Sidebar fixa no desktop e recolhível em telas menores.
+- Cabeçalho com seletor de organização, contexto do cluster quando aplicável, indicação “Demonstração” e menu do usuário.
+- Breadcrumbs, títulos objetivos, ações primárias claras, status com texto e cor, tabelas com filtros e gráficos com tooltips e unidades.
+- Funcionar bem em notebook e desktop; adaptar também para tablet e celular sem overflow horizontal da página.
+- Navegação por teclado, foco visível, labels acessíveis, contraste adequado e modais acessíveis.
+- Não exibir detalhes técnicos da implementação mock nos fluxos normais. Indicar que os dados são demonstrativos sem poluir cada componente.
+
+## 6. Navegação e telas
+
+### Visão geral
+
+Dashboard da organização selecionada com:
+
+- Clusters ativos, agentes em execução, requisições, consumo acumulado do mês e projeção mensal.
+- Uso de CPU, memória e GPU, com contratado, reservado e utilizado claramente diferenciados.
+- Gráficos de requisições ao longo do tempo, latência e custos.
+- Filtros de período: 24 horas, 7 dias e 30 dias, atualizando os dados exibidos.
+- Lista de clusters com status, capacidade utilizada, gasto estimado e link de detalhes.
+- Atividades recentes e alertas úteis, como limite de orçamento próximo e memória disponível baixa.
+- Ações “Criar cluster”, “Criar agente” e “Implantar serviço”.
+
+### Organizações
+
+Seletor funcional com pelo menos “Orzyon” e “Governo — Demonstração”. Trocar a organização deve atualizar todas as listas, métricas e seleções, sem misturar registros.
+
+Criar uma página de configuração da organização com nome, membros fictícios, papéis e orçamento. Alterações podem ser locais. Identificar controles de permissões como demonstrativos, sem prometer aplicação de segurança real.
+
+### Clusters
+
+Listagem pesquisável e filtrável por status e modalidade, com nome, organização, tipo de memória, recursos, agentes ativos e custo estimado.
+
+Pré-carregar:
+
+- Na Orzyon: “Orzyon — Produção” e “Orzyon — Laboratório”.
+- No Governo — Demonstração: “Receita Federal”, “Ministério da Justiça” e “Ministério da Economia”. Estes são cenários fictícios de demonstração, não clientes reais.
+
+Fluxo funcional “Criar cluster”, em etapas ou formulário bem organizado:
+
+1. Nome e finalidade.
+2. Modalidade: virtual ou dedicado.
+3. Perfil de computação: memória unificada AMD ou GPU com memória dedicada, ambos demonstrativos.
+4. Capacidade: vCPUs, memória, GPU e armazenamento, com sliders e campos numéricos sincronizados.
+5. Orçamento e política ao atingir o limite: alertar, impedir novas alocações ou pausar tarefas em lote.
+6. Resumo com estimativa de custo, identificada como ilustrativa, e confirmação.
+
+Ao criar, simular transição “Provisionando” para “Ativo” e incluir o cluster no estado persistido.
+
+Detalhes do cluster com abas: **Visão geral, Recursos, Agentes, Serviços, Modelos, Métricas, Custos e Configurações**.
+
+Permitir editar capacidade com resumo das alterações e custo estimado, pausar/retomar e excluir com confirmação. Tratar dependências explicitamente: bloquear exclusão com workloads existentes e informar quais precisam ser removidos, ou oferecer remoção em cascata claramente confirmada.
+
+### Recursos e memória
+
+- Em GPU dedicada, mostrar RAM e VRAM separadas, além da quantidade e perfil das GPUs.
+- Em memória unificada, mostrar um único total físico e a parcela destinada/disponível à GPU. Nunca somar RAM e VRAM como capacidades independentes quando são o mesmo orçamento físico.
+- Indicar capacidade por nó e quantidade de nós. Não apresentar memória agregada entre máquinas como uma única GPU automaticamente disponível.
+- Validar soma das reservas e limites. Impedir alocações que excedam a capacidade contratada no cenário demonstrativo.
+- Mostrar CPU, memória, GPU e armazenamento com unidades explícitas.
+
+### Agentes
+
+Listagem e criação/edição de agentes por cluster com:
+
+- Nome, descrição, status e tags.
+- Prompt de sistema editável.
+- Implantação de modelo utilizada, selecionada entre as disponíveis no cluster.
+- Perfil de análise: Essencial, Avançado ou Especializado.
+- Configurações de geração, como temperatura e limite de tokens, com explicações curtas.
+- Ferramentas e fontes de conhecimento demonstrativas habilitáveis.
+- Rotas editáveis com condição, destino e fallback; usar editor por linhas ou cards, sem exigir um editor visual complexo.
+- Limite de concorrência e recursos do runtime do agente.
+- Botões para salvar, pausar/ativar e testar.
+
+O perfil de análise é uma configuração ilustrativa associada a modelo e orçamento de execução. Não chamar de QI ou superinteligência, nem equiparar parâmetros a inteligência. Separar perfil de análise da capacidade de atender requisições simultâneas.
+
+Adicionar playground com histórico de conversa, seleção de agente e respostas predefinidas coerentes com seu propósito. Exibir “Resposta simulada”, tokens ilustrativos e latência simulada. Não realizar inferência real.
+
+### Modelos e motores
+
+Separar catálogo de modelos, motores disponíveis e implantações ativas.
+
+- Usar perfis fictícios claramente identificados, por exemplo “Modelo Demo 4B”, “Modelo Demo 32B” e “Modelo Demo 70B”; não inventar benchmarks ou compatibilidade oficial de modelos reais.
+- Mostrar parâmetros, quantização, contexto configurado e estimativa ilustrativa de memória total.
+- Incluir MAX como exemplo de motor na interface, com compatibilidade marcada como demonstrativa e dependente de homologação.
+- O fluxo de implantação seleciona cluster, modelo, motor e reserva de recursos.
+- Estados simulados: Preparando, Carregando, Disponível, Pausado e Falha.
+- A implantação pode ser compartilhada por vários agentes; mostrar os agentes vinculados.
+- Ao tentar uma configuração inviável, explicar o recurso insuficiente em linguagem clara.
+
+### Serviços e código
+
+Criar fluxo “Implantar serviço” com duas modalidades:
+
+1. **Código-fonte**: runtimes oficiais demonstrativos Python, Mojo e Python + Mojo. Permitir selecionar arquivo e editar um exemplo de código em área monoespaçada, informar comando de entrada e variáveis de ambiente fictícias.
+2. **Imagem de contêiner**: informar referência de imagem e comando opcional. Explicar que essa opção permite aplicações de outras linguagens, incluindo Go e Rust, com dependências mantidas pelo cliente.
+
+Mostrar etapas simuladas de construção e implantação, logs fictícios, versão, estado, recursos reservados e endpoint demonstrativo. Usar domínio reservado .example para endpoints fictícios. Botão de copiar endpoint deve funcionar.
+
+- Não executar ou compilar código de verdade.
+- Não enviar arquivos para servidores externos, buscar repositórios nem executar conteúdo de contêiner.
+- Não solicitar segredos reais; usar apenas variáveis demonstrativas e não persistir campos de segredo.
+- Explicar em ajuda contextual que Python + Mojo permite acelerar partes implementadas em Mojo; não prometer conversão automática de todo Python para código nativo.
+- Permitir pausar, retomar e remover serviços, atualizando métricas e reservas locais.
+
+### Métricas e observabilidade
+
+Gráficos e tabelas filtráveis por organização, cluster, agente/serviço e período:
+
+- Requisições, taxa de erro, latência p50/p95 e tokens por segundo.
+- Tokens de entrada e saída.
+- CPU, memória, utilização de GPU e memória destinada à GPU.
+- Fila e concorrência.
+- Eventos e logs demonstrativos com status, timestamp e busca.
+
+Usar séries determinísticas e coerentes. Não gerar valores aleatórios a cada render. As unidades e os totais devem ser consistentes entre dashboard, cluster e custos.
+
+### Custos e faturamento
+
+- Consumo mensal acumulado, projeção do mês, orçamento e saldo estimado.
+- Distribuição por cluster e categoria de recurso.
+- Separar custos de capacidade reservada dos custos variáveis de consumo; evitar dupla cobrança sem explicação.
+- Tabela de tarifas fictícias centralizada na camada mock, usada em todas as estimativas.
+- Aviso “Valores ilustrativos para demonstração; não representam uma oferta comercial”.
+- Alterar orçamento e política de limite localmente.
+- Exportar CSV demonstrativo funcional. Não criar pagamento ou checkout real.
+
+### Administração da cloud
+
+Criar uma área separada “Operação da cloud”, acessível por alternância de perfil demonstrativo no menu do usuário. Distinguir claramente a administração global da cloud do uso da organização Orzyon.
+
+- Mostrar pools de computação, nós, capacidade total, alocada e disponível, e saúde simulada.
+- Mostrar clusters atendidos por pool e distribuição por organização.
+- Disponibilizar pelo menos um pool AMD de memória unificada com dados de exemplo.
+- A visão global é exclusiva do perfil operador na simulação. O perfil cliente vê apenas a organização selecionada; isso é comportamento de interface, não uma garantia de segurança real.
+- Manter a operação global enxuta, sem deixar que ela substitua a experiência principal do cliente.
+
+## 7. Interações e consistência
+
+- Todos os botões principais devem funcionar: navegar, abrir formulário, atualizar estado, copiar, exportar ou simular uma operação com resultado visível.
+- Evitar links vazios, botões decorativos e páginas “em breve” nas funcionalidades descritas.
+- Implementar feedback de sucesso, erro, carregamento e estado vazio.
+- Formular regras simples e claras de capacidade; demonstrar pelo menos uma mensagem de recurso insuficiente.
+- Atualizar seletores após criar, editar e excluir entidades. Não deixar agentes apontando para modelos ou clusters inexistentes.
+- Impedir exclusão de uma implantação de modelo em uso e informar quais agentes a utilizam.
+- Diferenciar recursos reservados de utilização instantânea. A memória do modelo pertence à implantação, enquanto o agente tem seu próprio consumo de runtime.
+- Os gráficos devem refletir os filtros. Alterações de capacidade e orçamento devem atualizar estimativas derivadas.
+- Cancelar timers de simulação ao desmontar componentes; não usar atualizações rápidas que deixem o painel piscando.
+
+## 8. Rotas e organização sugeridas
+
+Criar rotas equivalentes a login, dashboard, organizações, clusters, detalhe de cluster, agentes, detalhe de agente, modelos, serviços, métricas, custos, configurações e operação da cloud. Preservar o contexto de organização e cluster na navegação.
+
+Preferir componentes compartilhados como AppShell, OrganizationSwitcher, ClusterSelector, MetricCard, ResourceMeter, StatusBadge, DataTable, ChartPanel, ConfirmDialog e formulários reutilizáveis.
+
+Os nomes são sugestões de implementação, não textos obrigatórios da interface. Evitar concentrar toda a aplicação em um único componente.
+
+## 9. Dados iniciais e qualidade
+
+Preparar dados suficientes para demonstrar todos os fluxos sem deixar as telas vazias: organizações, clusters, agentes com finalidades diferentes, serviços Python/Mojo, modelos compartilhados, logs, custos e séries temporais.
+
+Todos os dados devem ser fictícios. Não apresentar governo ou ministérios como clientes reais da Orzyon. Não usar logotipos institucionais sem fornecimento explícito.
+
+Manter os recursos iniciais dentro das capacidades. Demonstrar memória unificada corretamente, sem dupla contagem. Não inventar números de desempenho como resultados medidos em hardware real.
+
+## 10. Critérios de aceite e entrega
+
+Concluir a implementação e verificar pelo menos:
+
+1. Abrir login e entrar na demonstração com um clique, sem credenciais.
+2. Trocar de organização e verificar que dados e contexto mudam corretamente.
+3. Criar cluster, alterar capacidade e observar atualização da estimativa.
+4. Implantar modelo e criar agente usando essa implantação.
+5. Editar prompt e rotas, salvar e testar conversa simulada.
+6. Simular implantação de serviço Python, Mojo ou Python + Mojo e visualizar logs.
+7. Visualizar memória unificada sem contagem duplicada.
+8. Aplicar filtros de métricas e exportar custos em CSV.
+9. Recarregar a página preservando entidades locais; sair e entrar novamente.
+10. Alternar para a operação da cloud e visualizar pools sem confundir a organização Orzyon com a administração global.
+11. Restaurar a demonstração e recuperar o estado inicial.
+12. Executar build e checagem de tipos; corrigir erros relevantes e verificar layouts desktop e móvel se houver ferramenta de navegador disponível.
+
+Entregar código organizado e README curto com comandos de instalação/execução, explicação do modo demonstrativo e pontos de substituição por APIs futuras. Ao finalizar, informar o que foi implementado, como executar e qualquer limitação concreta. Não afirmar que autenticação, inferência, provisionamento ou faturamento reais foram implementados.
+
+Priorize um produto demonstrável e coeso. Tome decisões de implementação compatíveis com este escopo e prossiga sem exigir logo ou backend. Não publique nem contrate infraestrutura: entregue a aplicação local pronta para avaliação.

@@ -1,0 +1,9 @@
+node_modules
+dist
+.angular
+.git
+.agents
+.codex
+.aws
+deploy/.iac-state.json
+deploy/iac.local.toml

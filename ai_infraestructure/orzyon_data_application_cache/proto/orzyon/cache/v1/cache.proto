@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package orzyon.cache.v1;
+
+import "google/protobuf/duration.proto";
+
+// CacheService exposes an in-memory, namespaced key-value cache.
+//
+// Entries are identified by the (namespace, key) pair, so distinct
+// namespaces may safely reuse the same key. Namespaces are a logical
+// separation mechanism, not an authorization boundary.
+//
+// Values are opaque byte strings; the service never interprets them.
+service CacheService {
+  // Inserts a new entry or replaces an existing one.
+  rpc Put(PutRequest) returns (PutResponse);
+  // Fetches an entry. `found` distinguishes a cache miss from a hit
+  // whose stored value is an empty byte string.
+  rpc Get(GetRequest) returns (GetResponse);
+  // Removes an entry. Deleting a missing key succeeds (idempotent).
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
+
+message PutRequest {
+  string namespace = 1;
+  string key = 2;
+  bytes value = 3;
+  // Optional time-to-live. When unset, the server applies its
+  // configured default TTL.
+  google.protobuf.Duration ttl = 4;
+}
+
+message PutResponse {}
+
+message GetRequest {
+  string namespace = 1;
+  string key = 2;
+}
+
+message GetResponse {
+  // false => cache miss (value must be ignored); true => hit (value may
+  // legitimately be empty).
+  bool found = 1;
+  bytes value = 2;
+}
+
+message DeleteRequest {
+  string namespace = 1;
+  string key = 2;
+}
+
+message DeleteResponse {
+  // true => an entry existed and was removed; false => nothing to remove.
+  bool deleted = 1;
+}

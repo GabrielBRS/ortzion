@@ -1,0 +1,37 @@
+# Orquestrador de deploy — frontend da Orzyon Cloud (React/Vite) no RKE2/Rancher.
+# Painel: https://rancher.orzyon.ai/dashboard/c/local/explorer/apps.deployment
+# Workload: namespace "cloud" · deployment "cloud" · container "cloud-web" · nó orzyonserver
+
+[remote]
+# Este é o acesso SSH ao nó RKE2, não o DNS público nem a URL do Rancher.
+# IPv6 global fixo do orzyonserver (mesma rede local; IPv4 local: 192.168.1.173).
+host    = "2804:214:4013:31fc:c247:eff:fef6:801a"
+user    = "gabrielsousa"
+port    = 22
+identity = "~/.ssh/id_ed25519"
+workdir = "/tmp/iac-cloud"
+
+[k8s]
+namespace       = "cloud"
+deployment      = "cloud"
+container       = "cloud-web"
+# Ingress "cloud" (traefik) → Service cloud:80.
+ingress_host    = "cloud.orzyon.ai"
+ingress_hosts   = ["cloud.orzyon.ai"]
+rollout_timeout = 180
+# SPA: rotas internas caem no index.html via try_files.
+verify_paths    = ["/", "/login", "/clusters", "/healthz"]
+verify_tries    = 3
+verify_contains = "Orzyon Cloud"
+
+[build]
+mode       = "artifact"
+command    = ["npm", "run", "build"]
+dist       = "dist"
+dockerfile = "deploy/Dockerfile.runtime"
+nginx_conf = "deploy/nginx.conf"
+
+[image]
+repository    = "local/orzyon-cloud-frontend"
+keep          = 5
+containerd_ns = "k8s.io"

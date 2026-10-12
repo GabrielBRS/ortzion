@@ -1,0 +1,244 @@
+{
+  "history": [
+    {
+      "at": "2026-09-17T22:00:42-03:00",
+      "tag": "20260917-220039-304b038a",
+      "image": "local/orzyon-frontend:20260917-220039-304b038a",
+      "digest": "304b038ab2073a7f5df9a2e91bee51ff7db7ad53065101dab00dafe67aaa10c4",
+      "namespace": "orzyon",
+      "deployment": "orzyon"
+    },
+    {
+      "at": "2026-09-17T22:06:56-03:00",
+      "tag": "20260917-220643-304b038a",
+      "image": "local/orzyon-frontend:20260917-220643-304b038a",
+      "digest": "304b038ab2073a7f5df9a2e91bee51ff7db7ad53065101dab00dafe67aaa10c4",
+      "namespace": "orzyon",
+      "deployment": "orzyon"
+    },
+    {
+      "at": "2026-09-18T00:16:07-03:00",
+      "tag": "20260918-001553-b53d1aff",
+      "image": "local/orzyon-frontend:20260918-001553-b53d1aff",
+      "digest": "b53d1affe4e3e473db023e01e92c9035e23e96ce95e30181b6a26ce1e580a286",
+      "namespace": "orzyon",
+      "deployment": "orzyon"
+    },
+    {
+      "at": "2026-09-18T00:52:08-03:00",
+      "tag": "20260918-005155-19754d8d",
+      "image": "local/gabrielsousaorzyonai-frontend:20260918-005155-19754d8d",
+      "digest": "19754d8dfeff429ae4d194dc4ccfe18d4d1b25dfe45f22196d05baea49687953",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-18T01:05:21-03:00",
+      "tag": "20260918-010508-062ef36b",
+      "image": "local/gabrielsousaorzyonai-frontend:20260918-010508-062ef36b",
+      "digest": "062ef36b85516b1b556216bff57d1116b2ec5a329ade604ab0ec4d1108a6f121",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-18T11:52:28-03:00",
+      "tag": "20260918-115215-ce74ca3b",
+      "image": "local/gabrielsousaorzyonai-frontend:20260918-115215-ce74ca3b",
+      "digest": "ce74ca3b72795a38cf555c5c11e38609bf4f7a105536b154d65c0803890b6d86",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-18T16:30:03-03:00",
+      "tag": "20260918-162950-ce74ca3b",
+      "image": "local/gabrielsousaorzyonai-frontend:20260918-162950-ce74ca3b",
+      "digest": "ce74ca3b72795a38cf555c5c11e38609bf4f7a105536b154d65c0803890b6d86",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-18T16:45:43-03:00",
+      "tag": "20260918-164531-8eba88ac",
+      "image": "local/gabrielsousaorzyonai-frontend:20260918-164531-8eba88ac",
+      "digest": "8eba88ac604c8aaaf09fab20ed31ad9fbe6417fd53dcb5ec3fad056d519a4883",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-18T18:54:44-03:00",
+      "tag": "20260918-185431-8eba88ac",
+      "image": "local/gabrielsousaorzyonai-frontend:20260918-185431-8eba88ac",
+      "digest": "8eba88ac604c8aaaf09fab20ed31ad9fbe6417fd53dcb5ec3fad056d519a4883",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-22T21:13:22-03:00",
+      "tag": "20260922-211310-8eba88ac",
+      "image": "local/gabrielsousaorzyonai-frontend:20260922-211310-8eba88ac",
+      "digest": "8eba88ac604c8aaaf09fab20ed31ad9fbe6417fd53dcb5ec3fad056d519a4883",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-22T21:19:24-03:00",
+      "tag": "20260922-211911-8eba88ac",
+      "image": "local/gabrielsousaorzyonai-frontend:20260922-211911-8eba88ac",
+      "digest": "8eba88ac604c8aaaf09fab20ed31ad9fbe6417fd53dcb5ec3fad056d519a4883",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-09-22T21:21:02-03:00",
+      "tag": "20260922-212049-8eba88ac",
+      "image": "local/gabrielsousaorzyonai-frontend:20260922-212049-8eba88ac",
+      "digest": "8eba88ac604c8aaaf09fab20ed31ad9fbe6417fd53dcb5ec3fad056d519a4883",
+      "namespace": "gabrielsousaorzyonai",
+      "deployment": "gabrielsousaorzyonai"
+    },
+    {
+      "at": "2026-10-03T20:48:13-03:00",
+      "tag": "20261003-204800-b41cbde7",
+      "image": "local/orzyon-cloud-frontend:20261003-204800-b41cbde7",
+      "digest": "b41cbde7cf29451661e7e58f145ee4087c6912406954bb4aa7116b9ea5843247",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-03T21:00:56-03:00",
+      "tag": "20261003-210042-bb570bb4",
+      "image": "local/orzyon-cloud-frontend:20261003-210042-bb570bb4",
+      "digest": "bb570bb424e8df1ea425db682d52ffc599c50440a5a33ed99a3826f7954607be",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-03T21:17:44-03:00",
+      "tag": "20261003-211731-2d992434",
+      "image": "local/orzyon-cloud-frontend:20261003-211731-2d992434",
+      "digest": "2d992434b9209a2adb0c48532733f55816380d96a966174a938960d9c388ec3b",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-03T21:49:39-03:00",
+      "tag": "20261003-214926-09d83408",
+      "image": "local/orzyon-cloud-frontend:20261003-214926-09d83408",
+      "digest": "09d83408e7ca5c25d3fe9504af1a6cbb18e6f3c3c95b7ff071efc30c01015413",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T09:24:52-03:00",
+      "tag": "20261012-092438-32d5307b",
+      "image": "local/orzyon-cloud-frontend:20261012-092438-32d5307b",
+      "digest": "32d5307b9395843ddba08121f53956352ad11d6ae0bfbafae97c6192ab99ac9a",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T09:46:15-03:00",
+      "tag": "20261012-094602-6fe73bb2",
+      "image": "local/orzyon-cloud-frontend:20261012-094602-6fe73bb2",
+      "digest": "6fe73bb2c90d1e37ce9bc093fe0517e30471f6af8a73440bf87e9b9f35a2570c",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T12:04:47-03:00",
+      "tag": "20261012-120433-27e3a53f",
+      "image": "local/orzyon-cloud-frontend:20261012-120433-27e3a53f",
+      "digest": "27e3a53fc9e50d5fa8cf4d8e4030addcec9c79890228298043311138950b7fc9",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T12:20:18-03:00",
+      "tag": "20261012-122004-5fb4d41c",
+      "image": "local/orzyon-cloud-frontend:20261012-122004-5fb4d41c",
+      "digest": "5fb4d41c29a2418deaeaf6a9b8ebcd860c9bbfa28c0247691a18bde51faf61f1",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T12:31:31-03:00",
+      "tag": "20261012-123118-05f51a69",
+      "image": "local/orzyon-cloud-frontend:20261012-123118-05f51a69",
+      "digest": "05f51a69b5112f142376c59827ec4b6d231ad4c4f9cb2d13bd088357299534de",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T12:56:57-03:00",
+      "tag": "20261012-125644-7591c7cc",
+      "image": "local/orzyon-cloud-frontend:20261012-125644-7591c7cc",
+      "digest": "7591c7cc1c05b78df7b94e976a0af6ad5ad2e69666444c560b0c6ee337828031",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T13:11:25-03:00",
+      "tag": "20261012-131112-ff551683",
+      "image": "local/orzyon-cloud-frontend:20261012-131112-ff551683",
+      "digest": "ff551683b444c5f56c62c075dba20a821c84854519530b4023fbe083b494a6b3",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T13:25:28-03:00",
+      "tag": "20261012-132515-74d45145",
+      "image": "local/orzyon-cloud-frontend:20261012-132515-74d45145",
+      "digest": "74d45145c6b641c5c7ded63298854c7d2b6abe4072dd0fcf56e051ab8b7b0fe5",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T13:37:00-03:00",
+      "tag": "20261012-133646-a9ac196c",
+      "image": "local/orzyon-cloud-frontend:20261012-133646-a9ac196c",
+      "digest": "a9ac196c7b6bc138ad73eb104d7d8c9ad1393d1f6f0428a826cd88ae45df0d8f",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T13:44:51-03:00",
+      "tag": "20261012-134438-526af140",
+      "image": "local/orzyon-cloud-frontend:20261012-134438-526af140",
+      "digest": "526af1404af44be13e3b503c615b157a9846e48868a0918e58db1afd3f298f89",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T15:11:53-03:00",
+      "tag": "20261012-151140-8a298dfc",
+      "image": "local/orzyon-cloud-frontend:20261012-151140-8a298dfc",
+      "digest": "8a298dfcd7cd37fb937b39884331491e473ac961e6522c1ddd3c65804eb671f1",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T15:18:28-03:00",
+      "tag": "20261012-151815-9d1f56e5",
+      "image": "local/orzyon-cloud-frontend:20261012-151815-9d1f56e5",
+      "digest": "9d1f56e5c50b5ad813b3f969bc1bd8cdafa99edbc8788a0ade440be1f12101e0",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T15:41:52-03:00",
+      "tag": "20261012-154138-9f898451",
+      "image": "local/orzyon-cloud-frontend:20261012-154138-9f898451",
+      "digest": "9f898451a884f96bc234ec43d04ebbb65170eaf742fb9ed7f9d6ee75eac295dd",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    },
+    {
+      "at": "2026-10-12T16:02:46-03:00",
+      "tag": "20261012-160232-a359fa69",
+      "image": "local/orzyon-cloud-frontend:20261012-160232-a359fa69",
+      "digest": "a359fa691dcd76e8ae6d6fa59f1452627e096b8db31cc39475a0b35fe71f4294",
+      "namespace": "cloud",
+      "deployment": "cloud"
+    }
+  ]
+}
