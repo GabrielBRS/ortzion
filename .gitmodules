@@ -1,0 +1,3 @@
+[submodule "ai_platform/ai_cloud_platform_inference_engine/inference/max-local/modular"]
+	path = ai_platform/ai_cloud_platform_inference_engine/inference/max-local/modular
+	url = https://github.com/modular/modular.git
